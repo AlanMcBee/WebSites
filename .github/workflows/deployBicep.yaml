@@ -1,0 +1,52 @@
+on:
+  pull_request:
+    branches:
+      - website
+  push:
+    branches:
+      - website
+name: Azure ARM
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      # Checkout code
+    - name: checkout
+      uses: actions/checkout@main
+
+      # Log into Azure
+    - name: login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Deploy Bicep file
+    - name: deploy
+      uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ secrets.AZURE_RG }}
+        template: ./build/azure.bicep
+        failOnStdErr: false
+
+    # - name: setup DotNet
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: 7.0.0
+
+    # - name: dotnet build and publish
+    #   run: |
+    #     dotnet restore
+    #     dotnet build --configuration Release
+    #     dotnet publish -c Release
+
+    # - name: 'Deploy to Azure Web apps'
+    #   uses: azure/webapps-deploy@v2
+    #   with:
+    #     app-name:
+    #     package: '${{ env.AZURE_WEBAPP_NAME }}/'
+
+    # - name: logout
+    #   run: |
+    #     az logout

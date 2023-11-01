@@ -1,0 +1,21 @@
+{
+	"folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "workbench.colorTheme": "Elegant Red"
+    },
+    "extensions": {
+        "recommendations": [
+            "editorconfig.editorconfig",
+            "ms-azuretools.vscode-bicep",
+            "ms-dotnettools.csharp",
+            "ms-vscode.azure-account",
+            "eamodio.gitlens",
+            "github.vscode-github-actions",
+            "ms-vscode.powershell"
+        ]
+    }
+}
