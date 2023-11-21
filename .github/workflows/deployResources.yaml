@@ -1,4 +1,4 @@
-name: Azure Resources
+name: Build and Deploy Umbraco to Azure Web Apps
 
 on:
   pull_request:
