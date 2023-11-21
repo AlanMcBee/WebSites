@@ -5,7 +5,8 @@
         }
     ],
     "settings": {
-        "workbench.colorTheme": "Elegant Red"
+        "workbench.colorTheme": "Elegant Red",
+        "powershell.pester.codeLens": false
     },
     "extensions": {
         "recommendations": [
@@ -16,6 +17,17 @@
             "eamodio.gitlens",
             "github.vscode-github-actions",
             "ms-vscode.powershell"
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "PowerShell Interactive Session",
+                "type": "PowerShell",
+                "request": "launch"
+            }
+
         ]
     }
 }
