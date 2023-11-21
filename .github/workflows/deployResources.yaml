@@ -32,7 +32,7 @@ jobs:
       run: |
         dotnet restore ./src
         dotnet build ./src --configuration Release 
-        dotnet publish ./src -c Release --property:PublishDir='${{ vars.AZURE_WEBAPP_PACKAGE_PATH }}' 
+        dotnet publish ./src -c Release -o '../tswDeploy' 
 
     - name: Diagnose with PowerShell
       shell: pwsh
@@ -44,7 +44,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ vars.AZURE_WEBAPP_NAME }}
-        package: '${{ vars.AZURE_WEBAPP_PACKAGE_PATH }}'
+        package: '${{ vars.AZURE_WEBAPP_PACKAGE_PATH }}/tswDeploy'
 
     - name: logout
       run: |
