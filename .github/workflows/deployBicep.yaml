@@ -1,25 +1,25 @@
 on:
   pull_request:
     branches:
-      - website
+      - main
   push:
     branches:
-      - website
+      - main
 name: Azure ARM
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
 
-      # Checkout code
-    - name: checkout
-      uses: actions/checkout@main
+    #   # Checkout code
+    # - name: checkout
+    #   uses: actions/checkout@main
 
-      # Log into Azure
-    - name: login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    #   # Log into Azure
+    # - name: login
+    #   uses: azure/login@v1
+    #   with:
+    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Deploy Bicep file
     - name: deploy

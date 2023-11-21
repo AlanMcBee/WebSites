@@ -1,4 +1,5 @@
 param ResourceGroupLocation string = 'South Central US'
+param NetworkFirewallClientIP4Address string = ''
 
 @secure()
 param SqlServerAdministratorLoginPassword string
@@ -26,6 +27,24 @@ resource SqlServerResource 'Microsoft.Sql/servers@2023-02-01-preview' = {
         type: 'None'
     }
 
+    // Set a firewall rule to allow a single IP address
+    resource SqlServerClientIPAddressFirewallRule 'firewallRules' = if (NetworkFirewallClientIP4Address != '') {
+        name: 'AllowAll'
+        properties: {
+            startIpAddress: NetworkFirewallClientIP4Address
+            endIpAddress: NetworkFirewallClientIP4Address
+        }
+    }
+
+    // Set a firewall rule to allow all Azure services
+    resource SqlServerAllowAllAzureServicesFirewallRule 'firewallRules' = {
+        name: 'AllowAllAzureServices'
+        properties: {
+            startIpAddress: '0.0.0.0'
+            endIpAddress: '0.0.0.0'
+        }
+    }
+
     resource SqlServerDatabaseResource 'databases' = {
         location: ResourceGroupLocation
         name: 'sqldb-tsw-prd-scu'
@@ -46,3 +65,5 @@ resource SqlServerResource 'Microsoft.Sql/servers@2023-02-01-preview' = {
       }
       
 }
+
+

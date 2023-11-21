@@ -2,27 +2,27 @@ Set-StrictMode -Version latest
 
 . .\Set-BuildContext.ps1
 
-# az ad sp create-for-rbac --name $appName --role contributor --scopes /subscriptions/$subscriptionId/resourceGroups/$rgName --sdk-auth
+az ad sp create-for-rbac --name $appName --role contributor --scopes /subscriptions/$subscriptionId/resourceGroups/$rgName --sdk-auth
 
-$app = Get-AzADApplication -IdentifierUri 'https://twilightsoul.com/'
-if ($null -eq $app)
-{
-    $app = New-AzADApplication -DisplayName 'WebSite' -IdentifierUris @("https://twilightsoul.com/", "https://codecharm.com/")
-}
+# $app = Get-AzADApplication -IdentifierUri 'https://twilightsoul.com/' -ErrorAction SilentlyContinue
+# if ($null -eq $app)
+# {
+#     $app = New-AzADApplication -DisplayName 'WebSite' -IdentifierUris @("https://twilightsoul.com/", "https://codecharm.com/")
+# }
 
 
-$sp = Get-AzADServicePrincipal -ApplicationId $app.ApplicationId
-if ($null -eq $sp)
-{
-    $sp = New-AzADServicePrincipal -ApplicationId $app.ApplicationId -DisplayName 'WebSite' -Scope "/subscriptions/$subscriptionId/resourceGroups/$rgName" -Role Contributor
-}
+# $sp = Get-AzADServicePrincipal -ApplicationId $app.ApplicationId -ErrorAction SilentlyContinue
+# if ($null -eq $sp)
+# {
+#     $sp = New-AzADServicePrincipal -ApplicationId $app.ApplicationId -DisplayName 'WebSite' -Scope "/subscriptions/$subscriptionId/resourceGroups/$rgName" -Role Contributor
+# }
 
-"Sp:"
-$sp | ConvertTo-Json -Depth 5
+# "Sp:"
+# $sp | ConvertTo-Json -Depth 5
 
-$context = Get-AzContext
-$account = $context.Account
-$upn = $account.Id
+# $context = Get-AzContext
+# $account = $context.Account
+# $upn = $account.Id
 
 # $owner = $sp.
 

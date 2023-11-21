@@ -1,4 +1,5 @@
-param ResourceGroupLocation string = 'South Central US'
+param ResourceGroupLocation string
+param ClientIP4Address string
 
 resource KeyVaultResource 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
     name: 'kv-tsw-prd-scu'
@@ -48,5 +49,6 @@ module SqlServerResourceModule 'SqlServerModule.bicep' = {
     params: {
         ResourceGroupLocation: ResourceGroupLocation
         SqlServerAdministratorLoginPassword: KeyVaultResource.getSecret('kvss-tsw-prd-scu')
+        NetworkFirewallClientIP4Address: ClientIP4Address
     }
 }
