@@ -37,6 +37,7 @@ jobs:
         dotnet restore
         dotnet build --configuration Release 
         dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/tsw'
+        echo "##vso[task.setvariable variable=AZURE_WEBAPP_PACKAGE_PATH]${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/tsw"
 
     - name: 'Deploy to Azure Web apps'
       uses: azure/webapps-deploy@v2
