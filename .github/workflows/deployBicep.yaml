@@ -8,6 +8,7 @@ on:
 name: Azure ARM
 jobs:
   build-and-deploy:
+    if: false
     runs-on: ubuntu-latest
     steps:
 
