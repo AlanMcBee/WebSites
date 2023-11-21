@@ -38,11 +38,11 @@ jobs:
       shell: pwsh
       run: |
         Get-Location | Select-Object -Property Path
-        $newPath = Join-Path -Path ${{ github.workspace }} -ChildPath 'tswDeploy'
+        $newPath = Join-Path -Path ${{ github.workspace }} -ChildPath '../tswDeploy'
         $newPath = Resolve-Path -Path $newPath
         Write-OutPut $newPath
-        $newPath = Resolve-Path -Path '../tswDeploy'
-        Write-OutPut $newPath
+        $newPath2 = Resolve-Path -Path '../tswDeploy'
+        Write-OutPut $newPath2
 
     - name: 'Deploy to Azure Web apps'
       uses: azure/webapps-deploy@v2
