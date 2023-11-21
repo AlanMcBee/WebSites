@@ -1,13 +1,13 @@
 name: Azure Resources
 
 on:
-  workflow_dispatch:
   pull_request:
     branches:
       - website
   push:
     branches:
       - website
+  workflow_dispatch:
   
 env:
   AZURE_WEBAPP_NAME: ${{ vars.AZURE_WEBAPP_NAME }}
