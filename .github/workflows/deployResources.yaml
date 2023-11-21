@@ -30,17 +30,18 @@ jobs:
     - name: setup DotNet
       uses: actions/setup-dotnet@v3
 
-    - name: dotnet build and publish
-      run: |
-        dotnet restore
-        dotnet build --configuration Release
-        dotnet publish -c Release
+    # - name: dotnet build and publish
+    #   working-directory: ./src
+    #   run: |
+    #     dotnet restore
+    #     dotnet build --configuration Release 
+    #     dotnet publish -c Release
 
-    - name: 'Deploy to Azure Web apps'
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name:
-        package: '${{ env.AZURE_WEBAPP_NAME }}/'
+    # - name: 'Deploy to Azure Web apps'
+    #   uses: azure/webapps-deploy@v2
+    #   with:
+    #     app-name:
+    #     package: '${{ env.AZURE_WEBAPP_NAME }}/'
 
     - name: logout
       run: |
