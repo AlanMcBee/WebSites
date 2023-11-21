@@ -9,12 +9,9 @@ on:
       - website
   workflow_dispatch:
   
-env:
-  AZURE_WEBAPP_NAME: ${{ vars.AZURE_WEBAPP_NAME }}
-  AZURE_WEBAPP_PACKAGE_PATH: ${{ vars.AZURE_WEBAPP_PACKAGE_PATH }}
-
 jobs:
   build-and-deploy:
+    environment: prod
     runs-on: ubuntu-latest
     steps:
 
@@ -36,18 +33,18 @@ jobs:
       run: |
         dotnet restore
         dotnet build --configuration Release 
-        dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/tsw'
+        dotnet publish -c Release --property:PublishDir='../${{ vars.AZURE_WEBAPP_PACKAGE_PATH }}'
 
     - name: Diagnose with PowerShell
       shell: pwsh
       run: |
-        Get-ChildItem -Path ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/tsw -Recurse
+        Get-ChildItem -Path ${{ vars.AZURE_WEBAPP_PACKAGE_PATH }} -Recurse
 
     - name: 'Deploy to Azure Web apps'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/tsw'
+        app-name: ${{ vars.AZURE_WEBAPP_NAME }}
+        package: '${{ vars.AZURE_WEBAPP_PACKAGE_PATH }}'
 
     - name: logout
       run: |
