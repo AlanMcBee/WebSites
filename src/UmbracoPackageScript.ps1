@@ -13,6 +13,9 @@ if ($reInstall) {
     dotnet sln add "WebSiteProject"
 }
 
+dotnet add "WebSiteProject" package Azure.Extensions.AspNetCore.Configuration.Secrets
+dotnet add "WebSiteProject" package Azure.Identity
+
 #Add starter kit
 # dotnet add "WebSiteProject" package clean
 
