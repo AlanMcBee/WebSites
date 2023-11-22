@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ResourceGroupLocation": {
+      "value": "South Central US"
+    },
+    "ClientIP4Address": {
+      "value": "71.195.186.118"
+    }
+  }
+}
