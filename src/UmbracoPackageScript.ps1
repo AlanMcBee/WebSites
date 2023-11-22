@@ -14,7 +14,7 @@ if ($reInstall) {
 }
 
 #Add starter kit
-dotnet add "WebSiteProject" package clean
+# dotnet add "WebSiteProject" package clean
 
 #Add Packages
 # dotnet add "WebSiteProject" package Umbraco.Community.Contentment
