@@ -1,3 +1,5 @@
+using Azure.Identity;
+
 namespace WebSiteProject
 {
     public class Program
@@ -10,6 +12,15 @@ namespace WebSiteProject
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureUmbracoDefaults()
+                .ConfigureAppConfiguration((context, config) =>
+                {
+                    var settings = config.Build();
+                    var keyVaultEndpoint = settings["AzureKeyVaultEndpoint"];
+                    if (!string.IsNullOrEmpty(keyVaultEndpoint) && Uri.TryCreate(keyVaultEndpoint, UriKind.Absolute, out var validUri))
+                    {
+                        config.AddAzureKeyVault(validUri, new DefaultAzureCredential());
+                    }
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStaticWebAssets();
