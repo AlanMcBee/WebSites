@@ -21,10 +21,10 @@ dotnet add "WebSiteProject" package Azure.Identity
 
 #Add Packages
 dotnet add "WebSiteProject" package Umbraco.UIBuilder
+dotnet add "WebSiteProject" package Articulate
 # dotnet add "WebSiteProject" package Umbraco.Community.Contentment
 # dotnet add "WebSiteProject" package Diplo.GodMode
 # dotnet add "WebSiteProject" package SEOChecker
-# dotnet add "WebSiteProject" package Articulate
 # dotnet add "WebSiteProject" package Our.Umbraco.TagHelpers
 # dotnet add "WebSiteProject" package Our.Umbraco.LinkedPages
 # dotnet add "WebSiteProject" package Umbraco.TheStarterKit
