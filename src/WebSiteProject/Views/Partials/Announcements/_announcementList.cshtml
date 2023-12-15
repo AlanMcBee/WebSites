@@ -1,0 +1,358 @@
+﻿@using System.Linq
+@using System.Drawing
+@using Umbraco.Web.PublishedContentModels
+@using CodeCharm
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<IAnnouncementList>
+@functions {
+    public string TimeRemainingGradientBackgroundStyle(long remainingTimePercent)
+    {
+        var downlevelAgent = Request.Headers["user-agent"].Contains("Edge/18.");
+        if (downlevelAgent)
+        {
+            return null;
+        }
+        var usedColor = ColorTranslator.ToHtml(Color.Silver);
+        var remainingColor = ColorTranslator.ToHtml(Color.AliceBlue);
+        return $"background: -webkit-gradient(linear, left top, right top, color-stop({remainingTimePercent}%, {usedColor}), color-stop({remainingTimePercent}%, {remainingColor}));" +
+        $"background: -o-linear-gradient(left, {usedColor} {remainingTimePercent}%, {remainingColor} {remainingTimePercent}%);" +
+        $"background: linear-gradient(90deg, {usedColor} {remainingTimePercent}%, {remainingColor} {remainingTimePercent}%);";
+    }
+}
+@{
+    var debugPageValues = Request.IsLocal;
+    var showAnnouncements = Model.Content.ShowAnnouncements;
+    var announcements = Model.Content.Children<IAnnouncement>().Where(a => a.IsVisible() && a.AnnouncementEnabled);
+    var autoSortAnnouncements = Model.Content.AutoSortAnnouncements;
+    IOrderedEnumerable<IAnnouncement> orderedAnnouncements;
+    if (autoSortAnnouncements)
+    {
+        orderedAnnouncements = announcements.OrderBy(a => a.AnnouncementBeginTime.TimeOfDay).ThenBy(a => a.AnnouncementEndTime.TimeOfDay);
+    }
+    else
+    {
+        orderedAnnouncements = announcements.OrderBy(a => a.SortOrder);
+    }
+
+    var showFutureAnnouncementsToday = Model.Content.ShowFutureAnnouncementsToday;
+    var expiredAnnouncementVisibleDurationMinutes = Model.Content.ExpiredAnnouncementVisibleDuration.TryConvertTo<int>().Result;
+    var expiredAnnouncementVisibleDuration = new TimeSpan(0, expiredAnnouncementVisibleDurationMinutes, 0);
+
+    if (showAnnouncements && announcements.Count() > 0)
+    {
+        var pacificTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+        var pacificTimeZoneInfoName = pacificTimeZoneInfo.IsDaylightSavingTime(DateTimeOffset.UtcNow) ? pacificTimeZoneInfo.DaylightName : pacificTimeZoneInfo.StandardName;
+
+        var serverPresentDateTimeUtc = DateTime.UtcNow;
+        var serverPresentDateUtc = serverPresentDateTimeUtc.Date;
+        var serverPresentDateTimeLocal = TimeZoneInfo.ConvertTimeFromUtc(serverPresentDateTimeUtc, pacificTimeZoneInfo);
+        var serverPresentDateLocal = serverPresentDateTimeLocal.Date;
+        var serverPresentTimeLocal = serverPresentDateTimeLocal.TimeOfDay;
+        var serverPresentDayOfWeek = serverPresentDateLocal.DayOfWeek;
+        if (debugPageValues)
+        {
+            <!--
+            showFutureAnnouncementsToday       = @showFutureAnnouncementsToday
+            expiredAnnouncementVisibleDuration = @expiredAnnouncementVisibleDuration
+            pacificTimeZoneInfoName            = @pacificTimeZoneInfoName
+            serverDateTimeUtc                  = @serverPresentDateTimeUtc
+            serverDateUtc                      = @serverPresentDateUtc
+            serverDateTimeLocal                = @serverPresentDateTimeLocal
+            serverDateLocal                    = @serverPresentDateLocal
+            serverTimeLocal                    = @serverPresentTimeLocal
+            todayDayOfWeek                     = @serverPresentDayOfWeek
+            orderedAnnouncements.Count         = @orderedAnnouncements.Count()
+            -->
+        }
+        <table class="timetable">
+            <tbody>
+
+                @foreach (IAnnouncement announcement in orderedAnnouncements)
+                {
+                    try
+                    {
+                        var announcementStartDateTime = announcement.AnnouncementStart;
+                        var announcementStartDate = announcementStartDateTime.Date;
+                        var announcementStartDateIsCurrent = announcementStartDate <= serverPresentDateLocal;
+                        if (debugPageValues)
+                        {
+                            <!--
+                            announcement.Name              = @announcement.Name
+                            announcementStartDateTime      = @announcementStartDateTime
+                            announcementStartDate          = @announcementStartDate
+                            announcementStartDateIsCurrent = @announcementStartDateIsCurrent
+                            -->
+                        }
+                        if (announcementStartDateIsCurrent)
+                        {
+                            var announcementLastDateTime = announcement.AnnouncementLast;
+                            var announcementLastDate = announcementLastDateTime.Date;
+                            var announcementLastDateIsCurrent = announcementLastDate >= serverPresentDateLocal;
+                            if (debugPageValues)
+                            {
+                                <!--
+                                announcementLastDateTime      = @announcementLastDateTime
+                                announcementLastDate          = @announcementLastDate
+                                announcementLastDateIsCurrent = @announcementLastDateIsCurrent
+                                -->
+                            }
+                            if (announcementLastDateIsCurrent)
+                            {
+                                // These will need to be assigned values
+                                long viewAnnouncementTimePercent = 0;
+                                TimeSpan viewTimeToAnnouncementStart = TimeSpan.Zero;
+                                TimeSpan viewTimeToAnnouncementLast = TimeSpan.Zero;
+                                string viewAnnouncementStartDate = null;
+                                string viewAnnouncementLastDate = null;
+                                string viewAnnouncementStartTime = null;
+                                string viewAnnouncementLastTime = null;
+                                string viewTimeToAnnouncementStartPhrase = null;
+                                string viewTimeSinceAnnouncementStartedPhrase = null;
+                                string viewAnnouncementDurationPhrase = null;
+                                string viewTimeToAnnouncementLastPhrase = null;
+
+                                var showThisAnnouncement = false;
+                                var announcementRecurrent = announcement.AnnouncementRecurrent;
+
+                                if (debugPageValues)
+                                {
+                                    <!--
+                                    announcementRecurrent  = @announcementRecurrent
+                                    -->
+                                }
+                                if (announcementRecurrent)
+                                {
+                                    var announcementDays = announcement.AnnouncementDays;
+                                    var announcementDaysOfWeek = announcementDays.Select(day => Enum<DayOfWeek>.Parse(day));
+                                    var announcementDayIsToday = announcementDaysOfWeek.Contains(serverPresentDayOfWeek);
+
+                                    if (debugPageValues)
+                                    {
+                                        <!--
+                                        announcementDays       = @(string.Join(", ", announcementDays.ToArray()))
+                                        announcementDaysOfWeek = @(string.Join(", ", announcementDaysOfWeek.ToArray()))
+                                        announcementDayIsToday = @announcementDayIsToday
+
+                                        -->
+                                    }
+
+                                    if (announcementDayIsToday)
+                                    {
+                                        var announcementLastTime = announcement.AnnouncementEndTime.TimeOfDay;
+                                        var announcementLastTimeExpiredTime = announcementLastTime + expiredAnnouncementVisibleDuration;
+                                        var announcementLastTimeExpiredIsPast = announcementLastTimeExpiredTime <= serverPresentTimeLocal;
+
+                                        if (debugPageValues)
+                                        {
+                                            <!--
+                                            announcementLastTime      = @announcementLastTime
+                                            announcementExpiredTime   = @announcementLastTimeExpiredTime
+                                            announcementExpiredIsPast = @announcementLastTimeExpiredIsPast
+                                            -->
+                                        }
+                                        if (!announcementLastTimeExpiredIsPast)
+                                        {
+                                            var announcementStartTime = announcement.AnnouncementBeginTime.TimeOfDay;
+                                            var announcementStartIsPast = announcementStartTime <= serverPresentTimeLocal;
+                                            if (debugPageValues)
+                                            {
+                                                <!--
+                                                announcementStartTime   = @announcementStartTime
+                                                announcementStartIsPast = @announcementStartIsPast
+                                                -->
+                                            }
+                                            if (showFutureAnnouncementsToday || !announcementStartIsPast)
+                                            {
+                                                var timespanToAnnouncementLastTime = announcementLastTime - serverPresentTimeLocal;
+                                                var remainingAnnouncementTimePercent = 100 - timespanToAnnouncementLastTime.Ticks / ((announcementLastTime - announcementStartTime).Ticks / 100);
+
+                                                var timespanToAnnouncementStartTime = announcementStartTime - serverPresentTimeLocal;
+                                                var timeToAnnouncementStartTime = timespanToAnnouncementStartTime.ToPhrase(removeZeroTrailing: true);
+                                                var timeSinceAnnouncementStarted = (serverPresentTimeLocal - announcementStartTime).ToPhrase(removeZeroTrailing: true);
+                                                var announcementDuration = announcementLastTime - announcementStartTime;
+                                                var announcementDurationFormatted = announcementDuration.ToPhrase(removeZeroTrailing: true);
+                                                var timeToAnnouncementLastTime = timespanToAnnouncementLastTime.ToPhrase(removeZeroTrailing: true);
+
+                                                if (debugPageValues)
+                                                {
+                                                    <!--
+                                                    timespanToAnnouncementLastTime   = @timespanToAnnouncementLastTime
+                                                    remainingAnnouncementTimePercent = @remainingAnnouncementTimePercent
+
+                                                    timespanToAnnouncementStartTime  = @timespanToAnnouncementStartTime
+                                                    timeToAnnouncementStartTime      = @timeToAnnouncementStartTime
+                                                    timeSinceAnnouncementStarted     = @timeSinceAnnouncementStarted
+                                                    announcementDuration             = @announcementDuration
+                                                    announcementDurationFormatted    = @announcementDurationFormatted
+                                                    timeToAnnouncementLastTime       = @timeToAnnouncementLastTime
+                                                    -->
+                                                }
+                                                showThisAnnouncement = true;
+                                                viewAnnouncementTimePercent = remainingAnnouncementTimePercent;
+                                                viewTimeToAnnouncementStart = timespanToAnnouncementStartTime;
+                                                viewTimeToAnnouncementLast = timespanToAnnouncementLastTime;
+                                                viewAnnouncementStartTime = announcementStartTime.ToString("hh:mm t");
+                                                viewAnnouncementLastTime = announcementLastTime.ToString("hh:mm t");
+                                                viewTimeToAnnouncementStartPhrase = timeToAnnouncementStartTime;
+                                                viewTimeSinceAnnouncementStartedPhrase = timeSinceAnnouncementStarted;
+                                                viewAnnouncementDurationPhrase = announcementDurationFormatted;
+                                                viewTimeToAnnouncementLastPhrase = timeToAnnouncementLastTime;
+
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    var announcementStartTime = announcement.AnnouncementStart.Date + announcement.AnnouncementBeginTime.TimeOfDay;
+                                    if (debugPageValues)
+                                    {
+                                        <!--
+                                        announcementStartTime            = @announcementStartTime
+                                        -->
+                                    }
+                                    if (announcementStartTime <= serverPresentDateTimeLocal)
+                                    {
+                                        var announcementLastTime = announcement.AnnouncementLast.Date + announcement.AnnouncementEndTime.TimeOfDay;
+                                        var timespanToAnnouncementLastTime = announcementLastTime - serverPresentDateTimeLocal;
+                                        var remainingAnnouncementTimePercent = 100 - timespanToAnnouncementLastTime.Ticks / ((announcementLastTime - announcementStartTime).Ticks / 100);
+                                        var expiredAnnouncementLastTime = announcementLastTime + expiredAnnouncementVisibleDuration;
+                                        if (debugPageValues)
+                                        {
+                                            <!--
+                                            announcementLastTime             = @announcementLastTime
+                                            timespanToAnnouncementLastTime   = @timespanToAnnouncementLastTime
+                                            remainingAnnouncementTimePercent = @remainingAnnouncementTimePercent
+                                            expiredAnnouncementLastTime      = @expiredAnnouncementLastTime
+                                            -->
+                                        }
+                                        if (announcementLastTime >= serverPresentDateTimeLocal)
+                                        {
+                                            var timespanToAnnouncementStartTime = announcementStartDateTime - serverPresentDateTimeLocal;
+                                            var timeToAnnouncementStartTime = timespanToAnnouncementStartTime.ToPhrase(removeZeroTrailing: true);
+                                            var timeSinceAnnouncementStarted = (serverPresentDateTimeLocal - announcementStartTime).ToPhrase(removeZeroTrailing: true);
+                                            var announcementDuration = announcementLastTime - announcementStartTime;
+                                            var announcementDurationFormatted = announcementDuration.ToPhrase(removeZeroTrailing: true);
+                                            var announcementTimespanToAnnouncementLastTime = timespanToAnnouncementLastTime.ToPhrase(removeZeroTrailing: true);
+
+                                            viewAnnouncementTimePercent = remainingAnnouncementTimePercent;
+                                            viewAnnouncementStartDate = announcementStartTime.ToString("MMM-dd");
+                                            viewAnnouncementLastDate = announcementLastTime.ToString("MMM-dd");
+                                            viewAnnouncementStartTime = announcementStartTime.ToString("hh:mm t");
+                                            viewAnnouncementLastTime = announcementLastTime.ToString("hh:mm t");
+                                            viewTimeToAnnouncementStart = timespanToAnnouncementStartTime;
+                                            viewTimeToAnnouncementLast = timespanToAnnouncementLastTime;
+                                            viewTimeToAnnouncementStartPhrase = timeToAnnouncementStartTime;
+                                            viewTimeSinceAnnouncementStartedPhrase = timeSinceAnnouncementStarted;
+                                            viewAnnouncementDurationPhrase = announcementDurationFormatted;
+                                            viewTimeToAnnouncementLastPhrase = announcementTimespanToAnnouncementLastTime;
+
+                                            showThisAnnouncement = true;
+
+                                        }
+                                    }
+                                }
+
+                                if (showThisAnnouncement)
+                                {
+                                    if (debugPageValues)
+                                    {
+                                        // These should be assigned by now:
+                                        <!--
+                                        viewAnnouncementTimePercent            = @viewAnnouncementTimePercent
+                                        viewTimeToAnnouncementStart            = @viewTimeToAnnouncementStart
+                                        viewTimeToAnnouncementLast             = @viewTimeToAnnouncementLast
+                                        viewAnnouncementStartDate              = @viewAnnouncementStartDate
+                                        viewAnnouncementLastDate               = @viewAnnouncementLastDate
+                                        viewAnnouncementStartTime              = @viewAnnouncementStartTime
+                                        viewAnnouncementLastTime               = @viewAnnouncementLastTime
+
+                                        viewTimeToAnnouncementStartPhrase      = @viewTimeToAnnouncementStartPhrase
+                                        viewTimeSinceAnnouncementStartedPhrase = @viewTimeSinceAnnouncementStartedPhrase
+                                        viewAnnouncementDurationPhrase         = @viewAnnouncementDurationPhrase
+                                        viewTimeToAnnouncementLastPhrase       = @viewTimeToAnnouncementLastPhrase
+                                        -->
+                                    }
+                                    <tr style="@TimeRemainingGradientBackgroundStyle(viewAnnouncementTimePercent)" class="@(viewTimeToAnnouncementLast <= TimeSpan.Zero ? "ended" : null)">
+                                        <td rowspan="2">
+                                            <img src="@(announcement.GetPropertyValue<AnimatedGif>("announcementImageSrc")?.ExternalUrl)" alt="@(announcement.GetPropertyValue<AnimatedGif>("announcementImageSrc")?.Name)" />
+                                        </td>
+                                        <td>
+                                            <span class="content">@announcement.GetPropertyValue("announcementContent")</span>
+                                        </td>
+                                        <td class="start time">
+                                            <p>
+                                                @if (!string.IsNullOrWhiteSpace(viewAnnouncementStartDate))
+                                                {
+                                                    <span class="time">@viewAnnouncementStartDate</span><br />
+                                                }
+                                                <span class="time">@viewAnnouncementStartTime</span>
+                                            </p>
+                                            <sub>
+                                                @if (viewTimeToAnnouncementStart > TimeSpan.Zero)
+                                                {
+                                                    <p><mark><b>Not started.</b></mark></p>
+                                                    <p>Starts in @viewTimeToAnnouncementStartPhrase</p>
+                                                }
+                                                else
+                                                {
+                                                    <p><mark>Started</mark></p>
+                                                    <p>Started @viewTimeSinceAnnouncementStartedPhrase ago</p>
+                                                }
+                                            </sub>
+                                        </td>
+                                        <td class="timespan">
+                                            <span>
+                                                @viewAnnouncementDurationPhrase
+                                            </span>
+                                        </td>
+                                        <td class="stop time">
+                                            <p>
+                                                @if (!string.IsNullOrWhiteSpace(viewAnnouncementLastDate))
+                                                {
+                                                    <span class="time">@viewAnnouncementLastDate</span><br />
+                                                }
+                                                <span class="time">@viewAnnouncementLastTime</span>
+                                            </p>
+                                            <sub>
+                                                @if (viewTimeToAnnouncementLast > TimeSpan.Zero)
+                                                {
+                                                    <p>
+                                                        <mark>
+                                                            @if (viewTimeToAnnouncementStart > TimeSpan.Zero)
+                                                            {
+                                                                <text>Not Started.</text>
+                                                            }
+                                                            else
+                                                            {
+                                                                <b>In progress.</b>
+                                                            }
+                                                        </mark>
+                                                    </p>
+                                                    <p>Ends in @viewTimeToAnnouncementLastPhrase</p>
+                                                }
+                                                else
+                                                {
+                                                    <p><mark><b>Ended</b></mark></p>
+                                                }
+                                            </sub>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <meter value="@viewAnnouncementTimePercent" min="0" max="100">@viewTimeToAnnouncementLastPhrase</meter>
+                                        </td>
+                                    </tr>
+                                }
+
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        <!-- @ex -->
+                    }
+                }
+            </tbody>
+        </table>
+    }
+}

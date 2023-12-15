@@ -1,0 +1,13 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "_TwilightSoulMasterLayoutTemplate.cshtml";
+}
+
+@section Zone_Top
+{
+    @Html.Raw(Umbraco.Field("errorHeading"))
+}
+
+<article>
+    @Umbraco.Field("errorMessage")
+</article>

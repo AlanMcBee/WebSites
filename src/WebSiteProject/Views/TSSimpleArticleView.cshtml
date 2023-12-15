@@ -1,0 +1,55 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "_TwilightSoulMasterLayoutTemplate.cshtml";
+//	ViewBag.ShowChildrenMenu = false;
+    var refreshSeconds = Model.Content.GetPropertyValue<int>("refreshIntervalSeconds");
+    if (refreshSeconds > 0) {
+        ViewBag.AutoRefreshSeconds = refreshSeconds;
+    } else {
+        ViewBag.AutoRefreshSeconds = 0;
+    }
+}
+@Html.Partial("AutoRefresh/_autoRefresh")
+
+@Html.Partial("Articles/_article")
+
+@Html.Partial("SideMenu/_sideBarRelatedLinks")
+
+
+@section HtmlHeadCss 
+{
+    <style>
+        table.videoGrid {
+            border-collapse: collapse;
+        }
+        table.videoGrid tr:not(:last-child) {
+            border-bottom-style: solid;
+            border-bottom-width: 1pt;
+            border-bottom-color: #FFD700;
+        }
+        table.videoGrid td,
+        table.videoGrid th {
+            padding: 1em;
+        }
+    </style>
+    <style>
+      @Umbraco.Field("cssRules")
+    </style>
+    @Html.Partial("AutoRefresh/_autoRefreshStyles")
+}
+
+@section Zone_Low_1_60L
+{
+    @Umbraco.Field("row1left60Content")
+}
+
+@section Zone_Low_1_40R
+{
+    @Umbraco.Field("row1right40Content")
+}
+
+@section BodyScriptBottom
+{
+    @Html.Partial("AutoRefresh/_autoRefreshScripts")
+}
+

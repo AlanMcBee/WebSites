@@ -1,0 +1,20 @@
+@using Articulate
+@using Articulate.Models
+@model PostModel
+@{
+    Layout = "_Master.cshtml";
+    ViewBag.CssBodyClass = "post-template";
+}
+
+<div class="row blog-post">
+    <div class="col-s-9">
+
+        <div class="row main">
+            <div class="mainContent box">
+                @Html.ThemedPartial(Model, "Post", Model)
+            </div>
+        </div>
+
+    </div>
+
+</div>

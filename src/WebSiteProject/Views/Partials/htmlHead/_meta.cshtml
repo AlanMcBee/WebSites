@@ -1,0 +1,14 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    var metaKeywords = Umbraco.Field("pageMetaKeywords").ToHtmlString();
+    var metaDescription = Umbraco.Field("pageMetaDescription").ToHtmlString();
+}
+@if (!string.IsNullOrWhiteSpace(metaKeywords))
+{
+    <meta name="keywords" content="@metaKeywords"/>
+}
+@if (!string.IsNullOrWhiteSpace(metaDescription))
+{
+    <meta name="description" content="@metaDescription"/>
+}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">

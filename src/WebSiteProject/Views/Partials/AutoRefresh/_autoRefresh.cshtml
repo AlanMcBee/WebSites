@@ -1,0 +1,37 @@
+﻿@using CodeCharm
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    var pacificTimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+    var publishedDateTime = Model.Content.UpdateDate;
+    var publishedDateTimeUtc = publishedDateTime.ToUniversalTime();
+    var publishedTime = TimeZoneInfo.ConvertTimeFromUtc(publishedDateTimeUtc, pacificTimeZoneInfo);
+    var timeElapsed = DateTime.UtcNow.Subtract(publishedDateTimeUtc);
+    //Func<TimeSpan, string> formatTimeSpan = (duration) => (duration < TimeSpan.Zero ? @"\-" : string.Empty) + (duration.TotalDays >= 1 ? @"d\ \d\a\y\s\,\ " : string.Empty) + (duration.TotalHours >= 1 ? @"h\ \h\r\s\,\ " : string.Empty) + @"mm\ \m\i\n";
+    //var timeElapsedFormat = formatTimeSpan(timeElapsed);
+    //var timeElapsedFormat = timeElapsed.ToPhrase();
+}
+@if (ViewBag.AutoRefreshSeconds > 0) {
+	<div class="base-timer">
+        <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <g class="base-timer__circle">
+                <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+                <path
+                    id="base-timer-path-remaining"
+                    stroke-dasharray="283"
+                    class="base-timer__path-remaining ${remainingPathColor}"
+                    d="
+                    M 50, 50
+                    m -45, 0
+                    a 45,45 0 1,0 90,0
+                    a 45,45 0 1,0 -90,0
+                    "
+                ></path>
+            </g>
+        </svg>
+        <h6 id="base-timer-label" class="base-timer__label">refresh</h6>
+        <p><mark><b title="@(pacificTimeZoneInfo.IsDaylightSavingTime(DateTime.UtcNow) ? pacificTimeZoneInfo.DaylightName : pacificTimeZoneInfo.StandardName)">Now: @TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, pacificTimeZoneInfo).ToString("h:mm tt")</b></mark></p>
+        <p>Last updated:<br/>
+        @publishedTime.ToString("yyyy-MM-dd h:mm tt")<br/>
+        @timeElapsed.ToPhrase() ago</p>
+    </div>
+}

@@ -1,0 +1,49 @@
+﻿@using System.Collections
+@using Glimpse.Core.Extensions
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    ViewBag.ShowRightSidebar = true;
+    ViewBag.TemplateAlias = this.GetType().Name;
+    Layout = "_CodeCharmMasterLayoutTemplate.cshtml";
+}
+
+<article>
+    <header>
+        <h1>@Umbraco.Field("pageName")</h1>
+        <hr/>
+    </header>
+    
+    @Html.Partial("Articles/_article")
+    
+</article>
+
+@section SidebarZone
+{
+    <aside>
+        @if (Model.Content.GetProperty("alternateNames").HasValue)
+        {
+            <section>
+                <header>
+                    <h3>Alternate names</h3>
+                </header>
+                <span style="white-space: pre-line">@Umbraco.Field("alternateNames")</span>
+            </section>
+        }
+        <section>
+            @if (Model.Content.GetProperty("authorityType").HasValue)
+            {
+                var properties = Model.Content.GetPropertyValue<IEnumerable<string>>("authorityType");
+                var authTypes = string.Join(", ", properties);
+                <div>
+                    <strong>Type:</strong> @authTypes
+                </div>
+            }
+            @if (Model.Content.GetProperty("Website").HasValue)
+            {
+                <div>
+                    <strong>Website:</strong> <a href="@Umbraco.Field("webSite")">@Umbraco.Field("webSite")</a>
+                </div>
+            }
+        </section>
+    </aside>
+}

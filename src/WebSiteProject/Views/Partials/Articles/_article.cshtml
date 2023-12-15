@@ -1,0 +1,22 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web.Models
+@{
+var articleText = Umbraco.Field("articleText")?.ToHtmlString();
+}
+<article>
+    @if (Model.Content.GetPropertyValue<bool>("usePageNameAsHeading")) {
+    <header>
+        <h1>@Umbraco.Field("pageName")</h1>
+    </header>
+    }
+    @Umbraco.Field("articleContent")
+    
+    @if (!string.IsNullOrWhiteSpace(articleText))
+    {
+        <hr />
+        <h1>Article Text</h1>
+        <pre>
+            @articleText
+        </pre>
+    }
+</article>

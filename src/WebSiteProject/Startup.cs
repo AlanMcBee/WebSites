@@ -1,3 +1,5 @@
+using TwilightSoul;
+
 namespace WebSiteProject
 {
     public class Startup
@@ -35,6 +37,8 @@ namespace WebSiteProject
                 .AddDeliveryApi()
                 .AddComposers()
                 .Build();
+
+            //services.AddSingleton<FavIcon>();
         }
 
         /// <summary>
@@ -48,6 +52,8 @@ namespace WebSiteProject
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //app.UseMiddleware<FavIcon>();
 
             app.UseUmbraco()
                 .WithMiddleware(u =>

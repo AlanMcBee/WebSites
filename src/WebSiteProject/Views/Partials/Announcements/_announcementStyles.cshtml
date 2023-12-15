@@ -1,0 +1,75 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+<style>
+    table.timetable {
+        border-collapse: collapse;
+        color: blue;
+        font-size: 2em;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    table.timetable tr {
+        border-bottom: 1px solid black;
+    }
+
+    table.timetable tr.ended !important {
+        color: gray;
+        text-decoration-line: line-through;
+    }
+
+    table.timetable tr:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    table.timetable tr td {
+        padding: 0 1ex 1ex 1ex;
+    }
+
+    table.timetable tr:last-child td {
+        padding: 0 1ex 0;
+    }
+    
+    table.timetable td img {
+        max-height: 2in;
+        padding-bottom: 1mm;
+        padding-top: 1mm;
+    }
+
+    table.timetable td.time,
+    table.timetable td.timespan {
+        width: 12ex;
+        line-height: 1em;
+    }
+    
+    table.timetable td.time sub,
+    table.timetable td.timespan sub {
+        line-height: 1em;
+    }
+    
+    table.timetable td span.content {
+        text-align: center;
+    }
+
+    table.timetable td span.time {
+        width: 12ex;
+        font-family: monospace;
+        text-align: right;
+        white-space: pre;
+    }
+
+    table.timetable td.timespan {
+        background-color: indigo;
+        color: gold;
+    }
+
+    table.timetable td sub, 
+    table.timetable td sup {
+        display: block;
+        font-size: 10pt;
+    }
+
+    table.timetable td meter {
+        width: 100%;
+    }
+</style>
