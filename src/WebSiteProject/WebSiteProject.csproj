@@ -6,6 +6,12 @@
     <UserSecretsId>a0d075ca-4864-4628-989e-036f839b6655</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Properties\Resources.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Resources\ApplyClassToBodyWithBrowserVersion.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
