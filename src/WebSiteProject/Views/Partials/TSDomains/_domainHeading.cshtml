@@ -1,0 +1,46 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web.Models
+@{
+	var tsDomainCode = Model.Content.GetPropertyValue<int>("tsDomain");
+	var tsDomainText = Umbraco.GetPreValueAsString(tsDomainCode);
+	string sectionClass = string.Empty;
+	string divZoneId = string.Empty;
+	bool showPageName = true;
+	switch (tsDomainText) {
+	    case "Academy": 
+	        sectionClass = "bg-colorAcademy";
+	        divZoneId = "ZoneTopColor1";
+	        break;
+	    case "Camelot": 
+	        sectionClass = "bg-colorCamelot";
+	        divZoneId = "ZoneTopColor2";
+	        break;
+	    case "Little Village": 
+	        sectionClass = "bg-colorLittleVillage";
+	        divZoneId = "ZoneTopColor3";
+	        break;
+	    case "Moonlighting": 
+	        sectionClass = "bg-colorMoonlighting";
+	        divZoneId = "ZoneTopColor4";
+	        break;
+	    case "Voyager": 
+	        sectionClass = "bg-colorVoyager";
+	        divZoneId = "ZoneTopColor5";
+	        break;
+	    default:
+	        showPageName = false;
+	        sectionClass = "bg-colorTwilightBlue";
+	        divZoneId = "ZoneTopColor6";
+	        break;
+	}
+}
+@section Zone_Top
+{
+<section class="@sectionClass">
+    <div id="@divZoneId" class="container">
+        @if (showPageName) {
+            <h1>@Umbraco.Field("pageName")</h1>
+        }
+    </div>
+</section>
+}

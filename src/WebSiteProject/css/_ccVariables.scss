@@ -1,0 +1,49 @@
+﻿@import "_colors.scss";
+
+// site colors
+//////////////
+
+$codeCharmPane-color:       #e6d7eb;        // I don't know. Light, really light indigo; original is semi-transparent
+$codeCharmPane-contrast:    #000000;        // Black
+
+
+// Bootstrap overrides
+//////////////////////
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+$brand-primary:             #4B0082;        // Indigo
+
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+//** Background color for `<body>`.
+$body-bg:                   #ffffff;
+//** Global text color on `<body>`.
+$text-color:                $brand-primary;
+
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif:  Verdana, Arial, Helvetica, sans-serif;
+$font-family-serif:       Georgia, "Times New Roman", Times, serif;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace:   Consolas, Menlo, Monaco, "Courier New", monospace;
+$font-family-base:        $font-family-serif;
+
+$font-size-base:          14pt;
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base:        20/14;
+
+//** By default, this inherits from the `<body>`.
+$headings-font-family:    "Contrail One";
+$headings-font-weight:    500;
+
+
+@import "bootstrap/_variables.scss";

@@ -1,0 +1,10 @@
+﻿@inherits UmbracoTemplatePage
+@using Umbraco.Web.Models
+@{
+    ViewBag.IsRoot = true;
+    Layout = "_TwilightSoulMasterLayoutTemplate.cshtml";
+}
+
+@Html.Partial("Hero/_banner")
+
+@Html.Partial("Articles/_article")

@@ -1,0 +1,15 @@
+﻿@model Tuple<string, string>
+@{
+    var siteName = Model.Item1;
+    var touchTag = Model.Item2;
+}
+<link rel="apple-touch-icon" href="~/css/@siteName/icons/apple-touch-icon.png?v=@touchTag">
+<link rel="icon" type="image/png" href="~/css/@siteName/icons/favicon-32x32.png?v=@touchTag" sizes="32x32">
+<link rel="icon" type="image/png" href="~/css/@siteName/icons/favicon-16x16.png?v=@touchTag" sizes="16x16">
+<link rel="manifest" href="~/css/@siteName/icons/manifest.json?v=@touchTag">
+<link rel="mask-icon" href="~/css/@siteName/icons/safari-pinned-tab.svg?v=@touchTag" color="#000080">
+<link rel="shortcut icon" href="~/css/@siteName/icons/favicon.ico?v=@touchTag">
+<meta name="apple-mobile-web-app-title" content="@siteName">
+<meta name="application-name" content="@siteName">
+<meta name="msapplication-TileColor" content="#e6d7eb">
+<meta name="msapplication-TileImage" content="~/css/@siteName/icons/mstile-144x144.png?v=@touchTag">

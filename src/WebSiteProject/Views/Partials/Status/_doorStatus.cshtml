@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	var showDoorStatus = Model.Content.GetPropertyValue<bool>("showDoorStatus");
+	var showLights = Model.Content.GetPropertyValue<IEnumerable<string>>("showLights");
+	var selectedLight = Umbraco.GetPreValueAsString(Model.Content.GetPropertyValue<int>("selectedLight"));
+	var stopContent = Model.Content.GetPropertyValue("stopContent");
+	var waitContent = Model.Content.GetPropertyValue("waitContent");
+	var freeContent = Model.Content.GetPropertyValue("freeContent");
+}
+@if (showDoorStatus) {
+    <table class="availability">
+        <tbody>
+            <tr class="statuslights">
+                @if (showLights.Contains("Stop")) {
+                    <td class="stop @(selectedLight == "Stop" ? "on" : "off")">
+                        @stopContent
+                    </td>
+                }
+                @if (showLights.Contains("Wait")) {
+                    <td class="wait @(selectedLight == "Wait" ? "on" : "off")">
+                        @waitContent
+                    </td>
+                }
+                @if (showLights.Contains("Free")) {
+                    <td class="free @(selectedLight == "Free" ? "on" : "off")">
+                        @freeContent
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+}
