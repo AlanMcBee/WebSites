@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+$(document).ready(function () {
     //MovePageTitle
     if (typeof g_disableCheckoutInEditMode != 'undefined' && !g_disableCheckoutInEditMode) {
         $('.MoveToTitleZone').appendTo('#bt-pagetitle>.container');

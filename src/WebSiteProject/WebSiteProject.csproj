@@ -6,9 +6,15 @@
     <UserSecretsId>a0d075ca-4864-4628-989e-036f839b6655</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="Resources\ApplyClassToBodyWithBrowserVersion.js" />
-    <Content Include="Resources\CodeCharmDocumentReady.js" />
-    <Content Include="Resources\TwilightSoulDocumentReady.js" />
+    <Content Include="Resources\ApplyClassToBodyWithBrowserVersion.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CodeCharmDocumentReady.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\TwilightSoulDocumentReady.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
