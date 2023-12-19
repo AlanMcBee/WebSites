@@ -1,8 +1,9 @@
-﻿@inherits UmbracoTemplatePage
+﻿@* 20231218 *@
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-    Layout = "_TwilightSoulMasterLayoutTemplate.cshtml";
+	Layout = "_TwilightSoulMasterLayoutTemplate.cshtml";
 }
-
 @section Zone_Top
 {
     @Html.Raw(Umbraco.Field("errorHeading"))

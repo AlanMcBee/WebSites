@@ -6,7 +6,6 @@
 
     var refreshSeconds = Model.Content.GetPropertyValue<int>("refreshIntervalSeconds");
     ViewBag.AutoRefreshSeconds = refreshSeconds;
-    ViewBag.ShowLeftSideBar = true;
 }
 
 @section HtmlHeadBottom
@@ -27,17 +26,15 @@
     </style>
 }
 
-@section SidebarZone {
-    @Html.Partial("AutoRefresh/_autoRefresh")
+@Html.Partial("AutoRefresh/_autoRefresh")
 
-    @Html.Partial("Articles/_article")
-}
+@Html.Partial("Announcements/_announcementList")
+
+@Html.Partial("Articles/_article")
+
+@Html.Partial("Status/_doorStatus")
 
 @section BodyScriptBottom
 {
     @Html.Partial("AutoRefresh/_autoRefreshScripts")
 }
-
-@Html.Partial("Status/_doorStatus")
-
-@Html.Partial("Announcements/_announcementList")
