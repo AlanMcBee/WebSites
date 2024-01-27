@@ -1,0 +1,24 @@
+@using System.Collections.Immutable
+@inherits UmbracoViewPage
+
+@{
+    var homePage = Model.AncestorsOrSelf(1).First();
+    var homeId = homePage.Id;
+    var navigationNodeId = homePage.Value<int>("headingNavigation", defaultValue: 0);
+
+    var navigationNode = Umbraco.Content(navigationNodeId);
+    var navItems = navigationNode?.Children()?.Where(item => !item.Value<bool>("hide")).ToImmutableList();
+    var selectedNodeList = Model.Path.Split(',').Select(int.Parse).ToList();
+
+    selectedNodeList.Remove(homeId);
+
+}
+
+<!-- Nav -->
+<ul class="menu">
+    <li class="@(Model.Parent == null ? "sel" : null)">
+        <a href="/">Home</a>
+    </li>
+    <partial name="BindTuning/SubMenu" model="new SubMenuContext(navItems, homeId, selectedNodeList)" />
+</ul>
+<!-- /Nav -->

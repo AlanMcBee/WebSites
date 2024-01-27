@@ -16,7 +16,7 @@ namespace WebSiteProject
                 {
                     var settings = config.Build();
                     var keyVaultEndpoint = settings["AzureKeyVaultEndpoint"];
-                    if (!string.IsNullOrEmpty(keyVaultEndpoint) && Uri.TryCreate(keyVaultEndpoint, UriKind.Absolute, out var validUri))
+                    if (!String.IsNullOrEmpty(keyVaultEndpoint) && Uri.TryCreate(keyVaultEndpoint, UriKind.Absolute, out var validUri))
                     {
                         config.AddAzureKeyVault(validUri, new DefaultAzureCredential());
                     }

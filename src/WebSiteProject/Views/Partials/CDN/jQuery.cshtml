@@ -1,0 +1,10 @@
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment HostingEnvironment
+
+<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.4.min.js"></script>
+
+@* Fallback to loading jQuery from a local path if the CDN is unavailable *@
+@{
+    var jQueryPath = System.IO.Path.Combine(HostingEnvironment.WebRootPath, "/scripts/jquery-2.2.4.min.js");
+}
+<script>(window.jQuery || document.write(@jQueryPath)"><\/script>'));</script>
+

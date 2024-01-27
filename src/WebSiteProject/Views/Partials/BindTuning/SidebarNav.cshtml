@@ -1,0 +1,13 @@
+@using Umbraco.Cms.Web.Common.Views
+@model UmbracoViewPage
+<div class="visible-xs visible-sm"><hr></div>
+<div id="MenuV">
+    @{
+        page.Html.RenderPartial("~/Views/Partials/_BindNavigation.cshtml");
+    }
+    <script type="text/javascript">
+        (function ($) {
+            $("#MenuV .menu").BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Vertical" });
+        })(jQuery);
+    </script>
+</div>
