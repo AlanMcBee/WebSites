@@ -9,9 +9,6 @@
     <Compile Remove="Properties\Resources.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Remove="Views\Partials\BindTuning\SubMenu.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Remove="Properties\Resources.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -60,7 +57,6 @@
   <ItemGroup>
     <None Include="wwwroot\css\CodeCharm\icons\manifest.json" />
     <None Include="wwwroot\css\TwilightSoul\icons\manifest.json" />
-    <None Include="Views\Partials\BindTuning\SubMenu.cshtml" />
     <None Include="wwwroot\css\CCTouchUp.css" />
     <None Include="wwwroot\css\CodeCharm.css" />
     <None Include="wwwroot\css\CodeCharm.min.css" />
