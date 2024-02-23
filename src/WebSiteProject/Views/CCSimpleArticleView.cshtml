@@ -1,12 +1,11 @@
-﻿@* 20231218 *@
+@* 20231218 *@
 @using System.Collections
-@using Glimpse.Core.Extensions
 @using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inherits UmbracoViewPage
 @{
     Layout = "_CodeCharmMasterLayoutTemplate.cshtml";
 
-    var sidebar = Model.Content.GetProperty("showSideBar")?.Value;
+    var sidebar = Model.Value<string>("showSideBar");
     ViewBag.ShowLeftSidebar = sidebar == "left";
     ViewBag.ShowRightSidebar = sidebar == "right";
 
@@ -17,10 +16,10 @@
 @section HtmlHeadCss 
 {
     <style>
-        @Umbraco.Field("cssRules")
+        @Model.Value("cssRules")
     </style>
 }
 
-@Html.Partial("Announcements/_announcement")
+<partial name="Announcements/_announcement" />
 
-@Html.Partial("Articles/_article")
+<partial name="Articles/_article" />
