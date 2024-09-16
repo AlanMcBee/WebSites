@@ -18,8 +18,8 @@ builder.CreateUmbracoBuilder()
 
 // Get all the configuration values for debugging and write them to the logger
 var configDebugView = builder.Configuration.GetDebugView();
-Trace.WriteLine("Configuration values:");
-Trace.WriteLine(configDebugView);
+Console.WriteLine("Configuration values:");
+Console.WriteLine(configDebugView);
 
 WebApplication app = builder.Build();
 
