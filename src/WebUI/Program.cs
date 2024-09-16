@@ -1,10 +1,16 @@
+using CodeCharm.WebUI;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.ConfigureKeyVault();
 
 builder.CreateUmbracoBuilder()
     .AddBackOffice()
     .AddWebsite()
     .AddDeliveryApi()
     .AddComposers()
+    .AddAzureBlobMediaFileSystem()
+    .AddAzureBlobImageSharpCache()
     .Build();
 
 WebApplication app = builder.Build();
