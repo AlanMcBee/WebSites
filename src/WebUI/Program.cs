@@ -1,3 +1,5 @@
+#undef DiagnoseConfiguration
+
 using System.Diagnostics;
 
 using CodeCharm.WebUI;
@@ -16,6 +18,8 @@ builder.CreateUmbracoBuilder()
     .Build();
 
 
+#if DiagnoseConfiguration
+
 // Add logging providers
 // builder.Logging.ClearProviders(); // Optionally clear existing providers
 builder.Logging.AddConsole();     // Add logging to console
@@ -24,14 +28,21 @@ builder.Logging.AddDebug();       // Add logging to debug window (good for devel
 builder.Logging.AddAzureWebAppDiagnostics(); // Azure-specific logging provider (for diagnostics)
 #endif
 
+
 // Get all the configuration values for debugging and write them to the logger
 var configDebugView = builder.Configuration.GetDebugView();
 
+#endif
+
 WebApplication app = builder.Build();
+
+#if DiagnoseConfiguration
 
 // Get the ILogger and IConfiguration instances
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 logger.LogInformation("Configuration values: {configDebugView}", configDebugView);
+
+#endif
 
 await app.BootUmbracoAsync();
 
