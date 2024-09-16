@@ -1,6 +1,8 @@
+using System.Diagnostics;
+
 using CodeCharm.WebUI;
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 builder.ConfigureKeyVault();
 
@@ -12,6 +14,12 @@ builder.CreateUmbracoBuilder()
     .AddAzureBlobMediaFileSystem()
     .AddAzureBlobImageSharpCache()
     .Build();
+
+
+// Get all the configuration values for debugging and write them to the logger
+var configDebugView = builder.Configuration.GetDebugView();
+Trace.WriteLine("Configuration values:");
+Trace.WriteLine(configDebugView);
 
 WebApplication app = builder.Build();
 
