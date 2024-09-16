@@ -1,0 +1,10 @@
+﻿@inherits UmbracoTemplatePage
+@{
+  Layout = "_TwilightSoulMasterLayoutTemplate.cshtml";
+}
+<style>
+  @Umbraco.Field("cssRules")
+</style>
+<article>
+  @Umbraco.Field("articleText")
+</article>

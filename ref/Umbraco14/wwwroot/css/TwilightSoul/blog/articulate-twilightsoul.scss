@@ -1,0 +1,23 @@
+﻿.recentPosts {
+    li {
+        margin-bottom: 1em;
+
+        div > a.comment-count {
+            margin-top: 1ex;
+            font-style: italic;
+        }
+    }
+
+        li > a {
+            font-size: larger;
+        }
+}
+
+div.postcontent {
+    margin-top: 1em;
+}
+
+div.sharing,
+div.post-date {
+    text-align: right;
+}

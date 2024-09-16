@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square70x70logo src="/css/TwilightSoul/icons/mstile-70x70.png?v=bOvLGY0wyn"/>
+      <square150x150logo src="/css/TwilightSoul/icons/mstile-150x150.png?v=bOvLGY0wyn"/>
+      <square310x310logo src="/css/TwilightSoul/icons/mstile-310x310.png?v=bOvLGY0wyn"/>
+      <TileColor>#e6d7eb</TileColor>
+    </tile>
+  </msapplication>
+</browserconfig>

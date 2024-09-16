@@ -1,0 +1,304 @@
+@* 20231218 *@
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Resources
+@inherits UmbracoViewPage
+@{
+    Layout = null;
+    var isRoot = ViewBag.IsRoot ?? false;
+    var showChildrenMenu = ViewBag.ShowChildrenMenu ?? true;
+
+    const string touchTag = "bOvLGY0wyn"; // update just for favicons, Javascript, etc.
+
+    var umbracoEditFragmentPath = "/content/content/edit/" + Model.Value<int>("pageID");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+
+    <title>@Model.Value("title") | @Model.Value("siteName")</title>
+
+    <partial name="htmlHead/_meta" model="Model"/>
+
+    <partial name="htmlHead/_icons" model='Tuple.Create("TwilightSoul", touchTag)' />
+
+    <link rel="stylesheet" href="@("/css/TwilightSoul.min.css?v=" + touchTag)" />
+    <link rel="stylesheet" href="@("/css/TwilightSoul/css/font-awesome.min.css?v=" + touchTag)" />
+    <link rel="stylesheet" href="@("/css/TSTouchUp.css?v=" + touchTag)     />
+    }
+
+    <script src="~/scripts/TwilightSoul/js/bootstrap.min.js"></script>
+    <script src="~/scripts/TwilightSoul/js/BTScripts.min.js"></script>
+    <script src="~/scripts/TwilightSoul/js/resources.min.js"></script>
+
+    @RenderSection("HtmlHeadCss", required: false)
+    @RenderSection("tsHtmlHeadCss", required: false)
+
+    <partial name="CDN/jQuery" />
+
+    @RenderSection("HtmlHeadJs", false)
+    @RenderSection("tsHtmlHeadJs", false)
+
+    <script type="text/javascript">
+        var style_mobile_path = "@Url.Content("~/css/TwilightSoul/css/")";
+        @* // path for mobile nav css files, UMB-specific *@
+    </script>
+    @* <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --> *@
+    <!--[if lt IE 9]>
+        <script src="@Url.Content("~/scripts/TwilightSoul/js/html5shiv.min.js")"></script>
+        <script src="@Url.Content("~/scripts/TwilightSoul/js/respond.min.js")"></script>
+    <![endif]-->
+    <script type="text/javascript" src="@Url.Content("~/scripts/TwilightSoul/js/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/TwilightSoul/js/BTScripts.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/TwilightSoul/js/fix-responsive-WP8.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/TwilightSoul/js/parallax.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/TwilightSoul/js/resources.min.js")"></script>
+
+    @if (ViewBag.AutoRefreshSeconds > 0)
+    {
+        <meta http-equiv="refresh" content="@ViewBag.AutoRefreshSeconds">
+    }
+
+    @RenderSection("HtmlHeadBottom", false)
+    @RenderSection("tsHtmlHeadBottom", false)
+</head>
+<body>
+    <partial name="BindTuning/ApplyClassToBodyWithBrowserVersion"/>
+    <div class="theme-wrapper">
+        <header class="navbar@(isRoot ? string.Empty : " innerView")">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="Logo">
+                            <a href="/">
+                                <img style="border-width: 0;" alt="Logo" src="@Url.Content("/css/TwilightSoul/images/MyLogo60.png")" />
+                            </a>
+                        </div>
+                        <button data-target=".collapse-nav" data-toggle="collapse" class="navbar-toggle pull-right" type="button">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <div id="menu-container">
+                            <div class="navbar-collapse collapse-nav collapse">
+                                <nav>
+                                    <div id="MenuH">
+                                        <partial name="BindTuning/BindMenu" />
+                                        <script type="text/javascript">
+                                            (function ($) {
+                                                $("#MenuH .menu")
+                                                    .BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Horizontal" });
+                                            })(jQuery);
+                                        </script>
+                                    </div>
+                                    <div id="Search">
+                                        <div id="SearchBar">
+                                            <div class="searchBox">
+                                                <input type="text" maxlength="1000">
+                                                <input type="submit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        @*
+                        <a data-href="#" class="search-placeholder"></a>
+                        *@
+                    </div>
+                </div>
+            </div>
+        </header>
+        @if (isRoot)
+        {
+            <div id="bt-slider" class="container">
+                @RenderSection("PageTitleSlider", false)
+            </div>
+        }
+        else
+        {
+            <div id="bt-pagetitle">
+                <div class="container">@RenderSection("PageTitleZone", false)</div>
+            </div>
+        }
+        <main class="@(isRoot ? "main-page" : "innerView")" id="bt-main" role="main">
+
+            <partial name="TSDomains/_domainHeading" />
+
+            @RenderSection("Zone_Top", false)
+
+            <section class="main-zone">
+                <div class="container">
+                    <div class="row">
+                        @if (!isRoot && showChildrenMenu)
+                        {
+                            <div class="col-xs-12 col-sm-3 col-md-3" id="bt-sidebar">
+                                <!-- <div class="visible-xs visible-sm">
+                                    <hr>
+                                </div> -->
+                                <div id="MenuV">
+                                    <partial name="BindTuning/BindMenu" />
+                                    <script type="text/javascript">
+                                        (function ($) {
+                                            $("#MenuV .menu")
+                                                .BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Vertical" });
+                                        })(jQuery);
+                                    </script>
+                                </div>
+                                @RenderSection("SidebarZone", false)
+                            </div>
+                        }
+                        @if (showChildrenMenu)
+                        {
+                            <div class="@(!isRoot ? " col-xs-12 col-sm-9 col-md-9" : null)" id="bt-content" @(!isRoot ? @"main""" : null)>
+                                <div class="row">
+                                    <div class="col-md-12">@RenderBody()</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">@RenderSection("Zone_Low_1_60L", false)</div>
+                                    <div class="col-md-5">@RenderSection("Zone_Low_1_40R", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">@RenderSection("Zone_Low_2_70L", false)</div>
+                                    <div class="col-md-4">@RenderSection("Zone_Low_2_30R", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">@RenderSection("Zone_Low_3_50L", false)</div>
+                                    <div class="col-md-6">@RenderSection("Zone_Low_3_50R", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">@RenderSection("Zone_Low_4_100", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">@RenderSection("Zone_Low_5_40L", false)</div>
+                                    <div class="col-md-5">@RenderSection("Zone_Low_5_60R", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">@RenderSection("Zone_Low_6_30L", false)</div>
+                                    <div class="col-md-8">@RenderSection("Zone_Low_6_70R", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">@RenderSection("Zone_Low_7_30L", false)</div>
+                                    <div class="col-md-6">@RenderSection("Zone_Low_7_40C", false)</div>
+                                    <div class="col-md-3">@RenderSection("Zone_Low_7_30R", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">@RenderSection("Zone_Low_8_100", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">@RenderSection("Zone_Low_9_33L", false)</div>
+                                    <div class="col-md-4">@RenderSection("Zone_Low_9_34C", false)</div>
+                                    <div class="col-md-4">@RenderSection("Zone_Low_9_33R", false)</div>
+                                </div>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="@(!isRoot ? " col-xs-12 col-sm-12 col-md-12" : null)" id="bt-content" @(!isRoot ? @"main""" : null)>
+                                <div class="row">
+                                    <div class="col-md-12">@RenderBody()</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">@RenderSection("Zone_Low_1_60L", false)</div>
+                                    <div class="col-md-5">@RenderSection("Zone_Low_1_40R", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">@RenderSection("Zone_Low_2_70L", false)</div>
+                                    <div class="col-md-4">@RenderSection("Zone_Low_2_30R", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">@RenderSection("Zone_Low_3_50L", false)</div>
+                                    <div class="col-md-6">@RenderSection("Zone_Low_3_50R", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">@RenderSection("Zone_Low_4_100", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">@RenderSection("Zone_Low_5_40L", false)</div>
+                                    <div class="col-md-5">@RenderSection("Zone_Low_5_60R", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">@RenderSection("Zone_Low_6_30L", false)</div>
+                                    <div class="col-md-8">@RenderSection("Zone_Low_6_70R", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">@RenderSection("Zone_Low_7_30L", false)</div>
+                                    <div class="col-md-6">@RenderSection("Zone_Low_7_40C", false)</div>
+                                    <div class="col-md-3">@RenderSection("Zone_Low_7_30R", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">@RenderSection("Zone_Low_8_100", false)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">@RenderSection("Zone_Low_9_33L", false)</div>
+                                    <div class="col-md-4">@RenderSection("Zone_Low_9_34C", false)</div>
+                                    <div class="col-md-4">@RenderSection("Zone_Low_9_33R", false)</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-colorTwilightBlue">
+                <div class="container">
+                    @if (isRoot)
+                    {
+                        @RenderSection("SocialZone", false)
+                    }
+                </div>
+            </section>
+        </main>
+        <footer class="@(!isRoot ? " innerView" : null)">
+            @if (!isRoot)
+            {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9" id="Breadcrumb">
+                            <partial name="Breadcrumbs/_twilightSoul" />
+                        </div>
+                        <div class="col-md-3" id="MyPageEditor">
+                            <a href="/umbraco#@umbracoEditFragmentPath" target="TsEdit">@Model.Value("pageID")</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div id="FooterWidgets">
+                <div class="container">
+                    <div id="bt-footer">@RenderSection("FooterZone", false)</div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3 col-md-3">@RenderSection("Zone_TS_Footer_1_25L", false)</div>
+                        <div class="col-xs-6 col-sm-3 col-md-3">@RenderSection("Zone_TS_Footer_1_25CL", false)</div>
+                        <div class="col-xs-6 col-sm-3 col-md-3">@RenderSection("Zone_TS_Footer_1_25CR", false)</div>
+                        <div class="col-xs-6 col-sm-3 col-md-3">@RenderSection("Zone_TS_Footer_1_25R", false)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">@RenderSection("Zone_TS_Footer_2_33L", false)</div>
+                        <div class="col-md-4">@RenderSection("Zone_TS_Footer_2_33C", false)</div>
+                        <div class="col-md-4">@RenderSection("Zone_TS_Footer_2_33R", false)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">@RenderSection("Zone_TS_Footer_3_50L", false)</div>
+                        <div class="col-md-6">@RenderSection("Zone_TS_Footer_3_50R", false)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">@RenderSection("Zone_TS_Footer_4_100", false)</div>
+                    </div>
+                </div>
+            </div>
+            <div id="FooterCopyright">
+                <div class="container">
+                    <partial name="BindTuning/FooterLinks"/>
+                </div>
+            </div>
+        </footer>
+    </div>
+    @RenderSection("BodyScriptBottom", false)
+
+    @if (!isRoot)
+    {
+        <script type="text/javascript">
+            @* @Html.Raw(Resources.BindTuning.TwilightSoulDocumentReady_min) *@
+        </script>
+    }
+</body>
+</html>

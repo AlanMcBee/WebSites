@@ -1,0 +1,22 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+var articleText = Model.Value<IHtmlContent>("articleText")?.ToHtmlString();
+var articleContent = Model.Value<IHtmlContent>("articleContent");
+}
+<article>
+    @if (Model.Value<bool>("usePageNameAsHeading")) {
+    <header>
+        <h1>@Model Umbraco.Field("pageName")</h1>
+    </header>
+    }
+    @articleContent
+    
+    @if (!string.IsNullOrWhiteSpace(articleText))
+    {
+        <hr />
+        <h1>Article Text</h1>
+        <pre>
+            @articleText
+        </pre>
+    }
+</article>

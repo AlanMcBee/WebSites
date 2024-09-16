@@ -1,0 +1,117 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	var showDoorStatus = Model.Content.GetPropertyValue<bool>("showDoorStatus");
+	var Gold            = "rgba(255, 215,   0, 1.0)";
+	var FireBrick       = "rgba(178,  34,  34, 1.0)";
+	var ForestGreen     = "rgba( 34, 139,  34, 1.0)";
+	var DeepSkyBlue     = "rgba(  0, 191, 255, 1.0)";
+	var Indigo          = "rgba( 75,   0, 130, 1.0)";
+	var GoldN60         = "rgba(102,  86,   0, 1.0)";
+	var FireBrickN60    = "rgba( 71,  13,  13, 1.0)";
+	var ForestGreenN60  = "rgba( 13,  55,  13, 1.0)";
+	var DeepSkyBlueN60  = "rgba(  0,  76, 102, 1.0)";
+	var IndigoN60       = "rgba( 29,   0,  52, 1.0)";
+	var GoldN30         = "rgba(178, 150,   0, 0.2)";
+	var FireBrickN30    = "rgba(124,  23,  23, 1.0)";
+	var ForestGreenN30  = "rgba( 23,  97,  23, 1.0)";
+	var DeepSkyBlueN30  = "rgba(  0, 133, 178, 1.0)";
+	var IndigoN30       = "rgba( 52,   0,  90, 1.0)";
+	var GoldP80         = "rgba(254, 246, 204, 1.0)";
+	var FireBrickP80    = "rgba(245, 204, 204, 1.0)";
+	var ForestGreenP80  = "rgba(200, 241, 200, 1.0)";
+	var DeepSkyBlueP80  = "rgba(204, 242, 254, 1.0)";
+	var IndigoP80       = "rgba(222, 179, 255, 1.0)";
+}
+@if (showDoorStatus) {
+<style>
+    table.availability {
+      margin-top: 2em;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    table.availability tr.statuslights {
+      height: 6em;
+      vertical-align: center;
+    }
+    
+    @@keyframes stopGlow {
+      from {
+        color: white;
+        box-shadow: 0 0 0 transparent;
+      }
+      to {
+        color: @FireBrickP80;
+        box-shadow: 0 0 2ex @FireBrick;
+      }
+    }
+    
+    @@keyframes waitGlow {
+      from {
+        box-shadow: 0 0 0 transparent;
+      }
+      to {
+        box-shadow: 0 0 2ex @Gold;
+      }
+    }
+    
+    @@keyframes freeGlow {
+      from {
+        color: white;
+        box-shadow: 0 0 0 transparent;
+      }
+      to {
+        color: @ForestGreenP80;
+        box-shadow: 0 0 2ex @ForestGreen;
+      }
+    }
+    
+    table.availability tr.statuslights td.stop, 
+    table.availability tr.statuslights td.wait, 
+    table.availability tr.statuslights td.free {
+      width: 33%;
+      text-align: center;
+      font-size: 48pt;
+    }
+    
+    table.availability tr.statuslights td.on {
+      color: white;
+      text-shadow: 0 0 2pt black, 0 0 1ex white, 0 0 2ex white;
+    }
+    
+    table.availability tr.statuslights td.stop.on {
+      background-color: @FireBrick;
+      box-shadow: 0 0 1ex @FireBrickP80;
+      animation: stopGlow 0.5s ease-in-out infinite alternate;
+    }
+    
+    table.availability tr.statuslights td.stop.off {
+      color: @FireBrickN30;
+      background-color: @FireBrickN60;
+    }
+    
+    table.availability tr.statuslights td.wait.on {
+      color: black;
+      text-shadow: 0 0 2pt white, 0 0 1ex white, 0 0 2ex white;
+      background-color: @Gold;
+      box-shadow: 0 0 2ex @GoldP80;
+      animation: waitGlow 1s ease-in-out infinite alternate;
+    }
+    
+    table.availability tr.statuslights td.wait.off {
+      color: @GoldN30;
+      background-color: @GoldN60;
+    }
+    
+    table.availability tr.statuslights td.free.on {
+      background-color: @ForestGreen;
+w      box-shadow: 0 0 1ex @ForestGreenP80;
+      animation: freeGlow 1s ease-in-out infinite alternate;
+    }
+    
+    table.availability tr.statuslights td.free.off {
+      color: @ForestGreenN30;
+      background-color: @ForestGreenN60;
+    }
+</style>
+}

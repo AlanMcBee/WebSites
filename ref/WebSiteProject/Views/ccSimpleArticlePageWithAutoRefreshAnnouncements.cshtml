@@ -1,0 +1,40 @@
+﻿@* 20231218 *@
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = "_CodeCharmMasterLayoutTemplate.cshtml";
+
+    var refreshSeconds = Model.Content.GetPropertyValue<int>("refreshIntervalSeconds");
+    ViewBag.AutoRefreshSeconds = refreshSeconds;
+}
+
+@section HtmlHeadBottom
+{
+    @if (ViewBag.AutoRefreshSeconds > 0)
+    {
+        <meta http-equiv="refresh" content="@ViewBag.AutoRefreshSeconds">
+    }
+}
+
+@section HtmlHeadCss 
+{
+    @Html.Partial("Announcements/_announcementStyles")
+    @Html.Partial("AutoRefresh/_autoRefreshStyles")
+    @Html.Partial("Status/_doorStatusStyles")
+    <style>
+        @Umbraco.Field("cssRules")
+    </style>
+}
+
+@Html.Partial("AutoRefresh/_autoRefresh")
+
+@Html.Partial("Announcements/_announcementList")
+
+@Html.Partial("Articles/_article")
+
+@Html.Partial("Status/_doorStatus")
+
+@section BodyScriptBottom
+{
+    @Html.Partial("AutoRefresh/_autoRefreshScripts")
+}

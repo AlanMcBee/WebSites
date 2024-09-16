@@ -1,0 +1,11 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@* @using ContentModels = Umbraco.Web.PublishedModels *@
+@{
+    var heroBannerProperty = Model.GetProperty("heroBanner");
+    var hasBanner = heroBannerProperty?.HasValue() ?? false;
+    var firstBanner = hasBanner ? Umbraco.Media(heroBannerProperty) : null;
+}
+@if (hasBanner)
+{
+    <img src="@firstBanner?.MediaUrl()" alt="Twilight Soul Banner" />
+}

@@ -1,0 +1,9 @@
+﻿@* 20231218 *@
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    ViewBag.ShowRightSidebar = true;
+    Layout = "_CodeCharmMasterLayoutTemplate.cshtml";
+}
+@Html.Partial("Announcements/_announcement")
+@Html.Partial("Articles/_article")

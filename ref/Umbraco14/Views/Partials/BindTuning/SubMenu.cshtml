@@ -1,0 +1,9 @@
+@inherits UmbracoViewPage<SubMenuContext>
+
+@if (!Model.NavItems?.Any() ?? false)
+{
+    return;
+}
+
+@* @Html.PartialAsync("BindTuning/SubMenuItems", Model) *@
+

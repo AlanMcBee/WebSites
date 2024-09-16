@@ -1,0 +1,25 @@
+@* 20231218 *@
+@using System.Collections
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits UmbracoViewPage
+@{
+    Layout = "_CodeCharmMasterLayoutTemplate.cshtml";
+
+    var sidebar = Model.Value<string>("showSideBar");
+    ViewBag.ShowLeftSidebar = sidebar == "left";
+    ViewBag.ShowRightSidebar = sidebar == "right";
+
+    ViewBag.TemplateAlias = this.GetType().Name;
+
+}
+
+@section HtmlHeadCss 
+{
+    <style>
+        @Model.Value("cssRules")
+    </style>
+}
+
+<partial name="Announcements/_announcement" />
+
+<partial name="Articles/_article" />

@@ -1,0 +1,210 @@
+@* 20231218 *@
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Resources
+@inherits UmbracoViewPage
+@{
+    Layout = null;
+    var isRoot = ViewBag.IsRoot ?? false;
+
+    var showLeftSidebar = ViewBag.ShowLeftSidebar ?? false;
+    var showRightSidebar = ViewBag.ShowRightSidebar ?? false;
+    if (showLeftSidebar && showRightSidebar)
+    {
+        throw new NotSupportedException("Choose either the left or right sidebar, not both");
+    }
+
+    const string touchTag = "96324a5";
+    var umbracoEditFragmentPath = "/content/content/edit/" + Model.Value("pageID");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <title>@Model.Value("title", "pageName") | @Model.Value("siteName")</title>
+    @if (!string.IsNullOrWhiteSpace(Model.Value<string>("MetaKeywords")))
+    {
+        <meta name="keywords" content="@Model.Value("MetaKeywords")" />
+    }
+    @if (!string.IsNullOrWhiteSpace(Model.Value<string>("MetaDescription")))
+    {
+        <meta name="description" content="@Model.Value("MetaDescription")" />
+    }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" href="~/css/CodeCharm/icons/apple-touch-icon.png?v=@touchTag">
+    <link rel="icon" type="image/png" href="~/css/CodeCharm/icons/favicon-32x32.png?v=@touchTag" sizes="32x32">
+    <link rel="icon" type="image/png" href="~/css/CodeCharm/icons/favicon-16x16.png?v=@touchTag" sizes="16x16">
+    <link rel="manifest" href="~/css/CodeCharm/icons/manifest.json?v=@touchTag">
+    <link rel="mask-icon" href="~/css/CodeCharm/icons/safari-pinned-tab.svg?v=@touchTag" color="#4b0082">
+    <link rel="shortcut icon" href="~/css/CodeCharm/icons/favicon.ico?v=@touchTag">
+    <meta name="apple-mobile-web-app-title" content="CodeCharm">
+    <meta name="application-name" content="CodeCharm">
+    <meta name="msapplication-TileColor" content="#4b0082">
+    <meta name="msapplication-TileImage" content="~/css/CodeCharm/icons/mstile-144x144.png?v=@touchTag">
+    <meta name="msapplication-config" content="~/css/CodeCharm/icons/browserconfig.xml?v=@touchTag">
+
+    <link rel="stylesheet" href="~/css/CodeCharm.min.css" />
+    <link rel="stylesheet" href="~/css/CodeCharm/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/CCTouchUp.css?v=@touchTag" } />
+    <link rel="stylesheet" href="~/highlight/styles/hybrid.min.css" />
+
+    @RenderSection("HtmlHeadCss", false)
+
+    <script src="~/scripts/CodeCharm/js/bootstrap.min.js"></script>
+    <script src="~/scripts/CodeCharm/js/BTScripts.min.js"></script>
+    <script src="~/scripts/CodeCharm/js/resources.min.js"></script>
+    <script src="~/highlight/highlight.pack.js"></script>
+
+    <partial name="CDN/jQuery" />
+
+    @RenderSection("HtmlHeadJs", false)
+
+    <script>hljs.initHighlightingOnLoad();</script>
+    @*path for mobile nav css files, UMB-specific*@
+    <script type="text/javascript">
+        var style_mobile_path = "@Url.Content("~/css/CodeCharm/css/")";
+    </script>
+    @*
+    // Probably don't need these, but just in case...
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    *@
+
+    @* HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries *@
+    <!--[if lt IE 9]>
+        <script src="@Url.Content("~/scripts/CodeCharm/js/html5shiv.min.js")"></script>
+        <script src="@Url.Content("~/scripts/CodeCharm/js/respond.min.js")"></script>
+    <![endif]-->
+    @*
+    @if (ViewBag.AutoRefreshSeconds > 0)
+    {
+    <meta http-equiv="refresh" content="@ViewBag.AutoRefreshSeconds">
+    }
+    *@
+    @RenderSection("HtmlHeadBottom", false)
+    <!-- HTML HEAD -->
+</head>
+<body>
+    <partial name="BindTuning/ApplyClassToBodyWithBrowserVersion" />
+    <div class="theme-wrapper">
+        <header class="navbar navbar-static-top" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <span class="navbar-brand" id="Logo">
+                        <a href="/">
+                            <img style="border-width: 0px;" alt="CodeCharm Logo" src="@Url.Content("/css/CodeCharm/images/logo40.png")" />
+                        </a>
+                    </span>
+                </div>
+                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                    <div id="MenuH">
+                        <partial name="BindTuning/BindMenu" />
+                        <script type="text/javascript">
+                            (function ($) {
+                                $("#MenuH .menu").BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Horizontal" });
+                            })(jQuery);
+                        </script>
+                    </div>
+                    @*
+                    <div id="Search" class="hidden-xs">
+                    <div class="btn" data-toggle="button"></div>
+                    <div id="SearchBar">
+                    <div class="searchBox">
+                    <input type="text" maxlength="1000">
+                    <input type="submit">
+                    </div>
+                    </div>
+                    </div>
+                    *@
+                </nav>
+            </div>
+        </header>
+        @if (isRoot)
+        {
+            <div id="bt-slider" class="container">
+                @RenderSection("PageTitleSlider", false)
+            </div>
+        }
+        else
+        {
+            <div id="bt-pagetitle">
+                <div class="container">@RenderSection("PageTitleZone", false)</div>
+            </div>
+        }
+        <main>
+            @if (isRoot)
+            {
+                <div class="container" id="bs-main" role="main">
+                    <div id="bt-content">
+@*                         @BindTuning.BodyAndZones(this) *@
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="container">
+                    <div class="row">
+                        @if (showLeftSidebar)
+                        {
+                            <div class="col-md-3" id="bt-sidebar">
+                                @* @BindTuning.SidebarNav(this) *@
+                                @RenderSection("SidebarZone", false)
+                            </div>
+                        }
+                        @if (showLeftSidebar || showRightSidebar)
+                        {
+                            <div class="col-md-9" id="bt-content" role="main">
+                                @* @BindTuning.BodyAndZones(this) *@
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-12" id="bt-content" role="main">
+                                @* @BindTuning.BodyAndZones(this) *@
+                            </div>
+                        }
+                        @if (showRightSidebar)
+                        {
+                            <div class="col-md-3" id="bt-sidebar">
+                                @* @BindTuning.SidebarNav(this) *@
+                                @RenderSection("SidebarZone", false)
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </main>
+        <footer class="bs-footer" role="contentinfo">
+            <div class="container">
+                @if (!isRoot)
+                {
+                    <div class="row">
+                        <div class="col-md-9" id="Breadcrumb">
+                            <partial name="Breadcrumbs/_codeCharm" />
+                        </div>
+                        <div class="col-md-3" id="MyPageEditor">
+                            <a href="/umbraco#@umbracoEditFragmentPath" target="TsEdit">@Model.Value("pageID")</a>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div id="bt-footer">@RenderSection("FooterZone", false)</div>
+                </div>
+                <div class="row">
+                    <div class="footer-links">
+                        <partial name="BindTuning/FooterLinks" />
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @RenderSection("BodyScriptBottom", false)
+
+    <script type="text/javascript">
+        @* @Html.Raw(Resources.BindTuning.CodeCharmDocumentReady_min) *@
+    </script>
+</body>
+</html>
