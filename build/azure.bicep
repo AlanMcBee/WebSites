@@ -1,11 +1,20 @@
 param ResourceGroupLocation string
 param ClientIP4Address string
 
-resource KeyVaultResource 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+resource KeyVaultResource 'Microsoft.KeyVault/vaults@2024-04-01-preview' existing = {
     name: 'kv-tsw-prd-scu'
 }
 
-resource WebServerResource 'Microsoft.Web/serverfarms@2022-09-01' = {
+resource StorageResource 'Microsoft.Storage/storageAccounts@2023-05-01' = {
+    name: 'sttswprdscu'
+    location: ResourceGroupLocation
+    kind: 'StorageV2'
+    sku: {
+        name: 'Standard_LRS'
+    }
+}
+
+resource WebServerResource 'Microsoft.Web/serverfarms@2023-12-01' = {
     name: 'plan-tsw-prd-scu'
     location: ResourceGroupLocation
     kind: 'linux'
@@ -14,7 +23,7 @@ resource WebServerResource 'Microsoft.Web/serverfarms@2022-09-01' = {
     }
 }
 
-resource WebSiteResource 'Microsoft.Web/sites@2022-09-01' = {
+resource WebSiteResource 'Microsoft.Web/sites@2023-12-01' = {
     name: 'app-tsw-prd-scu'
     location: ResourceGroupLocation
     identity: {
@@ -29,6 +38,7 @@ resource WebSiteResource 'Microsoft.Web/sites@2022-09-01' = {
     }
     dependsOn: [
         SqlServerResourceModule
+        StorageResource
     ]
 
     resource WebSiteConfigResource 'config' = {
