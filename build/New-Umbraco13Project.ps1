@@ -1,0 +1,1 @@
+& dotnet new -i Umbraco.Templates::13.5.0 --force && dotnet new umbraco --version 13.5.0 --force -n "WebUI" --connection-string "Server=(LocalDB)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=S:\SQL Server\LocalDB\Umbraco.mdf;" && dotnet run --project "WebUI"
