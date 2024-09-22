@@ -1,9 +1,0 @@
-﻿Microsoft Azure Application Services Web Site (Internet Information Server)
-ASP.NET 4.6
-Umbraco 7.7.6
-
-Blog engine by Articulate
-Themes from BindTuning http://www.bindtuning.com
-
-
-CodeCharm syntax highlighter from Highlighter.js v. 9.8.0 https://highlightjs.org/ and https://github.com/isagalaev/highlight.js

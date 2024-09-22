@@ -1,7 +1,0 @@
-@code {
-    [Parameter]
-    public (string UrlAddress, string Target, string LinkType, string LinkText) Data { get; set; }
-}
-<li>
-    <a href="@Data.UrlAddress" target="@Data.Target" rel="@Data.LinkType">@Data.LinkText</a>
-</li>
