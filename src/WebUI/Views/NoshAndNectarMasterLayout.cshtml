@@ -1,12 +1,12 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BlockGrid>
 @{
 	Layout = "AllSiteLayoutMaster.cshtml";
 }
 
 @section HtmlHeadCss
 {
-    <link rel="stylesheet" href="@Url.Content("~/css/myblockgridlayout.css")" />
+	<link rel="stylesheet" href="@Url.Content("~/css/myblockgridlayout.css")" />
 }
 
 @await Html.GetBlockGridHtmlAsync(Model.Content)
