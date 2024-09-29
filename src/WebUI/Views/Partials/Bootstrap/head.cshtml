@@ -1,0 +1,26 @@
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+@await Html.PartialAsync("head/meta/default")
+@await Html.PartialAsync("head/site/icon")
+@{
+    var env = Context.RequestServices.GetService<IWebHostEnvironment?>();
+    if (env?.IsDevelopment() ?? false)
+    {
+        <!-- Font Awesome icons (free version)-->
+    }
+}
+@await Html.PartialAsync("head/fonts/fontAwesome")
+@{
+    if (env?.IsDevelopment() ?? false)
+    {
+        <!-- Google fonts-->
+    }
+}
+@await Html.PartialAsync("head/fonts/google/Montserrat")
+@await Html.PartialAsync("head/fonts/google/Lato")
+@{
+    if (env?.IsDevelopment() ?? false)
+    {
+        <!-- Core theme CSS (includes Bootstrap)-->
+    }
+}
+<link href="Bootstrap/Freelancer/css/styles.css" rel="stylesheet" asp-append-version="true" />

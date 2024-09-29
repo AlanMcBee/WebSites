@@ -4,6 +4,20 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\Bootstrap\Freelancer\assets\favicon.ico" />
+    <Content Remove="wwwroot\Bootstrap\Freelancer\assets\img\avataaars.svg" />
+    <Content Remove="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\cabin.png" />
+    <Content Remove="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\cake.png" />
+    <Content Remove="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\circus.png" />
+    <Content Remove="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\game.png" />
+    <Content Remove="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\safe.png" />
+    <Content Remove="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\submarine.png" />
+    <Content Remove="wwwroot\Bootstrap\Freelancer\css\styles.css" />
+    <Content Remove="wwwroot\Bootstrap\Freelancer\index.html" />
+    <Content Remove="wwwroot\Bootstrap\Freelancer\js\scripts.js" />
+    <Content Remove="wwwroot\Bootstrap\Freelancer\startbootstrap-freelancer-gh-pages.zip" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Articulate" Version="5.1.1" />
@@ -19,6 +33,21 @@
     <!-- Opt-in to app-local ICU to ensure consistent globalization APIs across different platforms -->
     <PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="72.1.0.3" />
     <RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="72.1.0.3" Condition="$(RuntimeIdentifier.StartsWith('linux')) or $(RuntimeIdentifier.StartsWith('win')) or ('$(RuntimeIdentifier)' == '' and !$([MSBuild]::IsOSPlatform('osx')))" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Bootstrap\Freelancer\assets\favicon.ico" />
+    <None Include="wwwroot\Bootstrap\Freelancer\assets\img\avataaars.svg" />
+    <None Include="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\cabin.png" />
+    <None Include="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\cake.png" />
+    <None Include="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\circus.png" />
+    <None Include="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\game.png" />
+    <None Include="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\safe.png" />
+    <None Include="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\submarine.png" />
+    <None Include="wwwroot\Bootstrap\Freelancer\css\styles.css" />
+    <None Include="wwwroot\Bootstrap\Freelancer\index.html" />
+    <None Include="wwwroot\Bootstrap\Freelancer\js\scripts.js" />
+    <None Include="wwwroot\Bootstrap\Freelancer\startbootstrap-freelancer-gh-pages.zip" />
   </ItemGroup>
 
   <PropertyGroup>
