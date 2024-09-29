@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Umbraco.BlockGrid.Example.Website" Version="1.0.2" />
     <PackageReference Include="Umbraco.Cms" Version="13.5.0" />
   </ItemGroup>
 
