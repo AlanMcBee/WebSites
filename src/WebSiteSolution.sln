@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI\WebUI.csproj", "{24E45F8F-B181-47A3-9A03-ACE3B3B8F753}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco13", "..\ref\Umbraco13\Umbraco13.csproj", "{ADCB59DF-0580-455D-B097-8B08246946D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{24E45F8F-B181-47A3-9A03-ACE3B3B8F753}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24E45F8F-B181-47A3-9A03-ACE3B3B8F753}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24E45F8F-B181-47A3-9A03-ACE3B3B8F753}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADCB59DF-0580-455D-B097-8B08246946D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADCB59DF-0580-455D-B097-8B08246946D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADCB59DF-0580-455D-B097-8B08246946D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADCB59DF-0580-455D-B097-8B08246946D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
