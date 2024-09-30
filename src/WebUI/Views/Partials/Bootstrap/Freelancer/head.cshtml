@@ -1,6 +1,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-@await Html.PartialAsync("head/meta/default")
-@await Html.PartialAsync("head/site/icon")
+@await Html.PartialAsync(Url.Content("~/Views/Partials/head/meta/default.cshtml"))
+@await Html.PartialAsync(Url.Content("~/Views/Partials/head/site/icon.cshtml"))
 @{
     var env = Context.RequestServices.GetService<IWebHostEnvironment?>();
     if (env?.IsDevelopment() ?? false)
@@ -8,19 +8,19 @@
         <!-- Font Awesome icons (free version)-->
     }
 }
-@await Html.PartialAsync("head/fonts/fontAwesome")
+@await Html.PartialAsync(Url.Content("~/Views/Partials/head/fonts/fontAwesome.cshtml"))
 @{
     if (env?.IsDevelopment() ?? false)
     {
         <!-- Google fonts-->
     }
 }
-@await Html.PartialAsync("head/fonts/google/Montserrat")
-@await Html.PartialAsync("head/fonts/google/Lato")
+@await Html.PartialAsync(Url.Content("~/Views/Partials/head/fonts/google/Montserrat.cshtml"))
+@await Html.PartialAsync(Url.Content("~/Views/Partials/head/fonts/google/Lato.cshtml"))
 @{
     if (env?.IsDevelopment() ?? false)
     {
         <!-- Core theme CSS (includes Bootstrap)-->
     }
 }
-<link href="Bootstrap/Freelancer/css/styles.css" rel="stylesheet" asp-append-version="true" />
+<link href="@Url.Content("~/Bootstrap/Freelancer/css/styles.css")" rel="stylesheet" asp-append-version="true" />

@@ -4,7 +4,7 @@
     Layout = "BootstrapBase.cshtml";
 }
 
-@await Html.PartialAsync("Bootstrap/Freelancer/Header")
-@await Html.PartialAsync("Bootstrap/Freelancer/Portfolio")
-@await Html.PartialAsync("Bootstrap/Freelancer/About")
-@await Html.PartialAsync("Bootstrap/Freelancer/Contact")
+@await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/Header.cshtml"))
+@await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/Portfolio.cshtml"))
+@await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/About.cshtml"))
+@await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/Contact.cshtml"))

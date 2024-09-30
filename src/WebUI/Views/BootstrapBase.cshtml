@@ -7,15 +7,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @await Html.PartialAsync("Bootstrap/Freelancer/head")
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/head.cshtml"))
 </head>
 <body id="page-top">
-    @await Html.PartialAsync("Bootstrap/Freelancer/Navigation")
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/Navigation.cshtml"))
     @RenderBody()
-    @await Html.PartialAsync("Bootstrap/Freelancer/Footer")
-    @await Html.PartialAsync("Bootstrap/Freelancer/Modals")
-    @await Html.PartialAsync("Bootstrap/Core")
-    @await Html.PartialAsync("Bootstrap/Freelancer/scripts")
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/Footer.cshtml"))
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/Modals.cshtml"))
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Core.cshtml"))
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/scripts.cshtml"))
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <!-- * *                               SB Forms JS                               * *-->
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
