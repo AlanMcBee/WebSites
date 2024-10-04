@@ -1,0 +1,19 @@
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/head.cshtml"))
+</head>
+<body id="page-top">
+    @RenderBody()
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/Footer.cshtml"))
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/Modals.cshtml"))
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Core.cshtml"))
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/scripts.cshtml"))
+</body>
+</html>

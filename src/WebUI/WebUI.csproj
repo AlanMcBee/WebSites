@@ -18,6 +18,9 @@
     <Content Remove="wwwroot\Bootstrap\Freelancer\js\scripts.js" />
     <Content Remove="wwwroot\Bootstrap\Freelancer\startbootstrap-freelancer-gh-pages.zip" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Plugins\BlockGridPreviews\NavigationGroup.html" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Articulate" Version="5.1.1" />
@@ -36,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="App_Plugins\BlockGridPreviews\package.manifest" />
     <None Include="wwwroot\Bootstrap\Freelancer\assets\favicon.ico" />
     <None Include="wwwroot\Bootstrap\Freelancer\assets\img\avataaars.svg" />
     <None Include="wwwroot\Bootstrap\Freelancer\assets\img\portfolio\cabin.png" />
@@ -62,5 +66,7 @@
     <AssemblyName>CC.$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>CodeCharm.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
 
 </Project>

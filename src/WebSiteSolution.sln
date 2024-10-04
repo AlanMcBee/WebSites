@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI\WebUI.csproj", "{24E45F8F-B181-47A3-9A03-ACE3B3B8F753}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "WebUI\WebUI.csproj", "{24E45F8F-B181-47A3-9A03-ACE3B3B8F753}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco13", "..\ref\Umbraco13\Umbraco13.csproj", "{ADCB59DF-0580-455D-B097-8B08246946D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umbraco13", "..\ref\Umbraco13\Umbraco13.csproj", "{ADCB59DF-0580-455D-B097-8B08246946D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,15 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@{
+    <!-- navigationAreaProperty -->
+    if (Model?.Areas.Any() != true)
+    {
+        <!-- no areas to render -->
+        return;
+    }
+}
+
+@foreach (var area in Model.Areas)
+{
+    <!-- navigation area: @area. -->
+    await Html.GetBlockGridItemAreaHtmlAsync(area);
+}

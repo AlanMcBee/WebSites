@@ -18,23 +18,14 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	// Mixin Content Type with alias "articleBase"
-	/// <summary>Article Base</summary>
-	public partial interface IArticleBase : IPublishedContent
-	{
-		/// <summary>Use Page Name as Header</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
-		bool UsePageNameAsHeader { get; }
-	}
-
-	/// <summary>Article Base</summary>
-	[PublishedModel("articleBase")]
-	public partial class ArticleBase : PublishedContentModel, IArticleBase
+	/// <summary>Page Tag</summary>
+	[PublishedModel("pageTag")]
+	public partial class PageTag : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
-		public new const string ModelTypeAlias = "articleBase";
+		public new const string ModelTypeAlias = "pageTag";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
@@ -43,14 +34,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<ArticleBase, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<PageTag, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public ArticleBase(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
+		public PageTag(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -59,14 +50,11 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Use Page Name as Header
+		/// Tag Alias: This will be set when the tag is created. It is not editable. You can use this tag for querying.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
-		[ImplementPropertyType("usePageNameAsHeader")]
-		public virtual bool UsePageNameAsHeader => GetUsePageNameAsHeader(this, _publishedValueFallback);
-
-		/// <summary>Static getter for Use Page Name as Header</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
-		public static bool GetUsePageNameAsHeader(IArticleBase that, IPublishedValueFallback publishedValueFallback) => that.Value<bool>(publishedValueFallback, "usePageNameAsHeader");
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("tagAlias")]
+		public virtual string TagAlias => this.Value<string>(_publishedValueFallback, "tagAlias");
 	}
 }

@@ -19,26 +19,16 @@ using Umbraco.Extensions;
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	// Mixin Content Type with alias "pageMeta"
-	/// <summary>Page Meta</summary>
+	/// <summary>Meta</summary>
 	public partial interface IPageMeta : IPublishedElement
 	{
-		/// <summary>Page Description</summary>
+		/// <summary>Title</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		string PageMetaDescription { get; }
-
-		/// <summary>Page Keywords</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		string PageMetaKeywords { get; }
-
-		/// <summary>Page Title</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		string Title { get; }
+		string PageTitle { get; }
 	}
 
-	/// <summary>Page Meta</summary>
+	/// <summary>Meta</summary>
 	[PublishedModel("pageMeta")]
 	public partial class PageMeta : PublishedElementModel, IPageMeta
 	{
@@ -70,42 +60,16 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Page Description
+		/// Title
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("pageMetaDescription")]
-		public virtual string PageMetaDescription => GetPageMetaDescription(this, _publishedValueFallback);
+		[ImplementPropertyType("pageTitle")]
+		public virtual string PageTitle => GetPageTitle(this, _publishedValueFallback);
 
-		/// <summary>Static getter for Page Description</summary>
+		/// <summary>Static getter for Title</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static string GetPageMetaDescription(IPageMeta that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "pageMetaDescription");
-
-		///<summary>
-		/// Page Keywords: The value must be a set of comma-separated tokens, each of which is a keyword relevant to the page.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("pageMetaKeywords")]
-		public virtual string PageMetaKeywords => GetPageMetaKeywords(this, _publishedValueFallback);
-
-		/// <summary>Static getter for Page Keywords</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
-		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static string GetPageMetaKeywords(IPageMeta that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "pageMetaKeywords");
-
-		///<summary>
-		/// Page Title: This appears in the browser window or tab or history, combined with the Site Name, separated with a vertical bar.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("title")]
-		public virtual string Title => GetTitle(this, _publishedValueFallback);
-
-		/// <summary>Static getter for Page Title</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
-		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static string GetTitle(IPageMeta that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "title");
+		public static string GetPageTitle(IPageMeta that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "pageTitle");
 	}
 }

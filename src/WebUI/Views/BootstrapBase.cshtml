@@ -3,23 +3,14 @@
 @{
     Layout = null;
 }
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/head.cshtml"))
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/head.cshtml"))
+    <title>@ViewData["PageTitle"]</title>
 </head>
-<body id="page-top">
-    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/Navigation.cshtml"))
+<body>
     @RenderBody()
-    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/Footer.cshtml"))
-    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/Modals.cshtml"))
-    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Core.cshtml"))
-    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/Freelancer/scripts.cshtml"))
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <!-- * *                               SB Forms JS                               * *-->
-    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    @* <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> *@
+    @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/BodyScript.cshtml"))
 </body>
 </html>
