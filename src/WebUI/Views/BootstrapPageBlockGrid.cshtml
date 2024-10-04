@@ -1,0 +1,19 @@
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "BootstrapBase.cshtml";
+
+    var env = Context.RequestServices.GetService<IWebHostEnvironment?>();
+    var siteSettings = Model.GetSiteSettings();
+    if (siteSettings is null)
+    {
+        <!-- Navigation.cshtml siteSettings == null -->
+        return;
+    }
+
+    var title = $"{Model.Value("pageTitle")} - {siteSettings.SiteName}";
+    ViewData.Add("PageTitle", title);
+}
+
+@await Html.GetBlockGridHtmlAsync(Model.Value<BlockGridModel>("content"))
