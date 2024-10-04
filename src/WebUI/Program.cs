@@ -1,4 +1,4 @@
-#undef DiagnoseConfiguration
+#define DiagnoseConfiguration
 
 using System.Diagnostics;
 
