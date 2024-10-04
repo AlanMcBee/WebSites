@@ -1,6 +1,9 @@
-#define DiagnoseConfiguration
+//#define DiagnoseConfiguration
+#undef DiagnoseConfiguration
 
+#if DiagnoseConfiguration && NET9_0_OR_GREATER
 using System.Diagnostics;
+#endif
 
 using CodeCharm.WebUI;
 
