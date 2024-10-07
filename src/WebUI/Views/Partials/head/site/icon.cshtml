@@ -1,8 +1,26 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
     var env = Context.RequestServices.GetService<IWebHostEnvironment?>();
     if (env?.IsDevelopment() ?? false)
     {
         <!-- Favicon-->
     }
+    var shortSitePath = string.Empty;
+    var siteSettings = Model?.GetHomeDocument()?.GetSiteSettings();
+    if (siteSettings is null)
+    {
+        return;
+    }
+    var shortSitePathSegment = siteSettings.ShortSitePathSegment;
+    var siteName = siteSettings.SiteName;
 }
-<link rel="icon" type="image/x-icon" href="@Url.Content("~/Bootstrap/Freelancer/assets/favicon.ico")" asp-append-version="true" />
+<link rel="apple-touch-icon" href="~/u/@shortSitePathSegment/icons/apple-touch-icon.png" asp-append-version="true">
+<link rel="icon" type="image/png" href="~/u/@shortSitePathSegment/icons/favicon-32x32.png" sizes="32x32" asp-append-version="true">
+<link rel="icon" type="image/png" href="~/u/@shortSitePathSegment/icons/favicon-16x16.png" sizes="16x16" asp-append-version="true">
+<link rel="manifest" href="~/u/@shortSitePathSegment/icons/manifest.json" asp-append-version="true">
+<link rel="mask-icon" href="~/u/@shortSitePathSegment/icons/safari-pinned-tab.svg" color="#000080" asp-append-version="true">
+<link rel="shortcut icon" href="~/u/@shortSitePathSegment/icons/favicon.ico" asp-append-version="true">
+<meta name="apple-mobile-web-app-title" content="@siteName">
+<meta name="application-name" content="@siteName">
+<meta name="msapplication-TileColor" content="#e6d7eb">
+<meta name="msapplication-TileImage" content="~/u/@shortSitePathSegment/icons/mstile-144x144.png">

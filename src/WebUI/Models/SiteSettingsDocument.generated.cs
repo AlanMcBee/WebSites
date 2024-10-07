@@ -58,6 +58,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel NavigationRoot => global::Umbraco.Cms.Web.Common.PublishedModels.SiteNavigationComponent.GetNavigationRoot(this, _publishedValueFallback);
 
 		///<summary>
+		/// Short Site Path Segment: The two-letter path used by templates and partial templates to locate resources in the wwwroot folder (images, css, etc.)
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("shortSitePathSegment")]
+		public virtual string ShortSitePathSegment => global::Umbraco.Cms.Web.Common.PublishedModels.SiteSettingsComponent.GetShortSitePathSegment(this, _publishedValueFallback);
+
+		///<summary>
 		/// Site Name: This name will appear as part of the page title in the browser for all (or maybe just most) pages on the site
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]

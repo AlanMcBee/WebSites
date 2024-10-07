@@ -22,6 +22,11 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 	/// <summary>Site Settings</summary>
 	public partial interface ISiteSettingsComponent : IPublishedElement
 	{
+		/// <summary>Short Site Path Segment</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		string ShortSitePathSegment { get; }
+
 		/// <summary>Site Name</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
@@ -58,6 +63,19 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		}
 
 		// properties
+
+		///<summary>
+		/// Short Site Path Segment: The two-letter path used by templates and partial templates to locate resources in the wwwroot folder (images, css, etc.)
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("shortSitePathSegment")]
+		public virtual string ShortSitePathSegment => GetShortSitePathSegment(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Short Site Path Segment</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static string GetShortSitePathSegment(ISiteSettingsComponent that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "shortSitePathSegment");
 
 		///<summary>
 		/// Site Name: This name will appear as part of the page title in the browser for all (or maybe just most) pages on the site

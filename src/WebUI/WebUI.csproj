@@ -54,6 +54,15 @@
     <None Include="wwwroot\Bootstrap\Freelancer\startbootstrap-freelancer-gh-pages.zip" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\u\cc\" />
+    <Folder Include="wwwroot\u\dp\" />
+    <Folder Include="wwwroot\u\mo\" />
+    <Folder Include="wwwroot\u\ot\" />
+    <Folder Include="wwwroot\u\nn\" />
+    <Folder Include="wwwroot\u\ts\icons\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <!-- Razor files are needed for the backoffice to work correctly -->
     <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
