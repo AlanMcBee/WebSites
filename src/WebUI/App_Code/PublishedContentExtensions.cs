@@ -15,9 +15,9 @@ public static class PublishedContentExtensions
         return null; 
     }
 #else
-    public static HomeDocument? GetHomeDocument(this IPublishedContent publishedContent)
+    public static HomeDocumentBase? GetHomeDocument(this IPublishedContent publishedContent)
     {
-        return publishedContent.AncestorOrSelf<HomeDocument>();
+        return publishedContent.AncestorOrSelf<HomeDocumentBase>();
     }
 
     public static SiteSettingsDocument? GetSiteSettings(this IPublishedContent publishedContent)

@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Home: BlockGrid</summary>
 	[PublishedModel("homeBlockGridDocument")]
-	public partial class HomeBlockGridDocument : HomeDocument, IFooterBlockGridContentComponent, IHeaderBlockGridContentComponent, IMainBlockGridContentComponent
+	public partial class HomeBlockGridDocument : HomeDocumentBase, IFooterBlockGridContentComponent, IHeaderBlockGridContentComponent, IMainBlockGridContentComponent
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -54,23 +54,23 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("footerContent")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel FooterContent => global::Umbraco.Cms.Web.Common.PublishedModels.FooterBlockGridContentComponent.GetFooterContent(this, _publishedValueFallback);
+		[ImplementPropertyType("blockgridFooterContent")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel BlockgridFooterContent => global::Umbraco.Cms.Web.Common.PublishedModels.FooterBlockGridContentComponent.GetBlockgridFooterContent(this, _publishedValueFallback);
 
 		///<summary>
 		/// Header Content
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("headerContent")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel HeaderContent => global::Umbraco.Cms.Web.Common.PublishedModels.HeaderBlockGridContentComponent.GetHeaderContent(this, _publishedValueFallback);
+		[ImplementPropertyType("blockgridHeaderContent")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel BlockgridHeaderContent => global::Umbraco.Cms.Web.Common.PublishedModels.HeaderBlockGridContentComponent.GetBlockgridHeaderContent(this, _publishedValueFallback);
 
 		///<summary>
 		/// Content
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("content")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel Content => global::Umbraco.Cms.Web.Common.PublishedModels.MainBlockGridContentComponent.GetContent(this, _publishedValueFallback);
+		[ImplementPropertyType("blockgridContent")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel BlockgridContent => global::Umbraco.Cms.Web.Common.PublishedModels.MainBlockGridContentComponent.GetBlockgridContent(this, _publishedValueFallback);
 	}
 }

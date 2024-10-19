@@ -19,13 +19,13 @@ using Umbraco.Extensions;
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Page: BlockGrid</summary>
-	[PublishedModel("pageBlockGridDocument2")]
-	public partial class PageBlockGridDocument2 : PageDocument, IFooterBlockGridContentComponent, IHeaderBlockGridContentComponent, IMainBlockGridContentComponent
+	[PublishedModel("pageBlockGridDocument")]
+	public partial class PageBlockGridDocument : PageDocumentBase, IFooterBlockGridContentComponent, IHeaderBlockGridContentComponent, IMainBlockGridContentComponent
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
-		public new const string ModelTypeAlias = "pageBlockGridDocument2";
+		public new const string ModelTypeAlias = "pageBlockGridDocument";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
@@ -34,14 +34,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<PageBlockGridDocument2, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<PageBlockGridDocument, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public PageBlockGridDocument2(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
+		public PageBlockGridDocument(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -54,23 +54,23 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("footerContent")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel FooterContent => global::Umbraco.Cms.Web.Common.PublishedModels.FooterBlockGridContentComponent.GetFooterContent(this, _publishedValueFallback);
+		[ImplementPropertyType("blockgridFooterContent")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel BlockgridFooterContent => global::Umbraco.Cms.Web.Common.PublishedModels.FooterBlockGridContentComponent.GetBlockgridFooterContent(this, _publishedValueFallback);
 
 		///<summary>
 		/// Header Content
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("headerContent")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel HeaderContent => global::Umbraco.Cms.Web.Common.PublishedModels.HeaderBlockGridContentComponent.GetHeaderContent(this, _publishedValueFallback);
+		[ImplementPropertyType("blockgridHeaderContent")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel BlockgridHeaderContent => global::Umbraco.Cms.Web.Common.PublishedModels.HeaderBlockGridContentComponent.GetBlockgridHeaderContent(this, _publishedValueFallback);
 
 		///<summary>
 		/// Content
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("content")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel Content => global::Umbraco.Cms.Web.Common.PublishedModels.MainBlockGridContentComponent.GetContent(this, _publishedValueFallback);
+		[ImplementPropertyType("blockgridContent")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel BlockgridContent => global::Umbraco.Cms.Web.Common.PublishedModels.MainBlockGridContentComponent.GetBlockgridContent(this, _publishedValueFallback);
 	}
 }

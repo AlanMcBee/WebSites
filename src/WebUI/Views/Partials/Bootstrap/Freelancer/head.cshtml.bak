@@ -23,4 +23,4 @@
         <!-- Core theme CSS (includes Bootstrap)-->
     }
 }
-
+<link href="@Url.Content("~/Bootstrap/Freelancer/css/styles.css")" rel="stylesheet" asp-append-version="true" />

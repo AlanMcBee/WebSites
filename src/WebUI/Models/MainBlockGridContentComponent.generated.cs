@@ -25,7 +25,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		/// <summary>Content</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel Content { get; }
+		global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel BlockgridContent { get; }
 	}
 
 	/// <summary>Main BlockGrid Content Component</summary>
@@ -64,12 +64,12 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("content")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel Content => GetContent(this, _publishedValueFallback);
+		[ImplementPropertyType("blockgridContent")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel BlockgridContent => GetBlockgridContent(this, _publishedValueFallback);
 
 		/// <summary>Static getter for Content</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.5.0+a6c5581")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel GetContent(IMainBlockGridContentComponent that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel>(publishedValueFallback, "content");
+		public static global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel GetBlockgridContent(IMainBlockGridContentComponent that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel>(publishedValueFallback, "blockgridContent");
 	}
 }

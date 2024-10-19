@@ -8,6 +8,7 @@
 <head>
     @await Html.PartialAsync(Url.Content("~/Views/Partials/Bootstrap/head.cshtml"))
     @await Html.PartialAsync(Url.Content("~/Views/Partials/head/site/title.cshtml"))
+    <link rel="stylesheet" href="@Url.Content("~/css/myblockgridlayout.css")" />
     @RenderSection("headLast", false)
 </head>
 <body>

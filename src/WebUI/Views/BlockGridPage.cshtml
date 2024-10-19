@@ -2,13 +2,11 @@
 @using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-    Layout = "BootstrapBase.cshtml";
+	Layout = "BlockGridBase.cshtml";
 }
 
 @section headLast
 {
-    <link rel="stylesheet" href="@Url.Content("~/css/myblockgridlayout.css")" />
 }
-
 
 @await Html.GetBlockGridHtmlAsync(Model.Value<BlockGridModel>("blockgridContent"))

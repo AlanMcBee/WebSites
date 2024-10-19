@@ -1,0 +1,16 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = null;
+    
+    var env = Context.RequestServices.GetService<IWebHostEnvironment?>();
+    var siteSettings = Model.GetSiteSettings();
+    if (siteSettings is null)
+    {
+        <!-- Navigation.cshtml siteSettings == null -->
+        return;
+    }
+
+    var title = $"{Model.Value("pageTitle")} - {siteSettings.SiteName}";
+}
+
+<title>@title</title>
